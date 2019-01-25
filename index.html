@@ -99,7 +99,7 @@
   <meta name="description" content="记录成长的过程">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Aries&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="https://ranna520.github.io/index.html">
 <meta property="og:site_name" content="Aries&#39;s Blog">
 <meta property="og:description" content="记录成长的过程">
 <meta property="og:locale" content="zh-CN">
@@ -112,7 +112,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="https://ranna520.github.io/">
 
 
 
@@ -321,7 +321,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/25/Flutter-Semantics-控件/">
+    <link itemprop="mainEntityOfPage" href="https://ranna520.github.io/2019/01/25/Flutter-Semantics-控件/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aries">
@@ -366,7 +366,7 @@
                 
               
 
-              <time title="创建时间：2019-01-25 12:26:33 / 修改时间：12:31:50" itemprop="dateCreated datePublished" datetime="2019-01-25T12:26:33+08:00">2019-01-25</time>
+              <time title="创建时间：2019-01-25 12:26:33 / 修改时间：13:03:40" itemprop="dateCreated datePublished" datetime="2019-01-25T12:26:33+08:00">2019-01-25</time>
             
 
             
@@ -423,128 +423,21 @@
 
       
         
-          
-            <p>原文链接：<a href="https://www.didierboelens.com/2018/07/semantics/" target="_blank" rel="noopener">https://www.didierboelens.com/2018/07/semantics/</a></p>
-<p>这篇文章主要用来解释 Semantics 组件的作用，是译文 内容非原创</p>
+          <p>原文链接：<a href="https://www.didierboelens.com/2018/07/semantics/" target="_blank" rel="noopener">https://www.didierboelens.com/2018/07/semantics/</a><br>这篇文章主要用来解释 Semantics 组件的作用，是译文 内容非原创</p>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>如果你看过一些有关于Flutter的内容，你有时注意到使用了 <strong><em>Semantics</em></strong> 或者 <strong><em>SemanticsConfiguration</em></strong> 组件，但是在官方文档中有关这些内容的叙述并不多。本文是对这个主题的介绍，并且展示考虑在您的 APP 中使用这类组件的重要性和一些有趣的内容。</p>
 <h2 id="简而言之——这是什么？"><a href="#简而言之——这是什么？" class="headerlink" title="简而言之——这是什么？"></a>简而言之——这是什么？</h2><p>在官方文档中是这样介绍 <strong><em>Semantics</em></strong> 类的：</p>
 <blockquote>
 <p>A widget that annotates the widget tree with a description of the meaning of the widgets Used by accessibility tools, search engines, and other semantic analysis software to determine the meaning of the application.</p>
 </blockquote>
-<p>通过对控件含义的描述信息注释控件树的一个控件，可通过可访问性工具，搜索引擎和其他语义化分析的软件确定应用程序的含义。</p>
-<p>简而言之：</p>
-<ul>
-<li>可选择性。这意味着你可以完全不关心它的使用，但是不建议</li>
-<li>主要用于在 <strong><em>Android TalkBack</em></strong> 或者 <strong><em>iOS VoiceOver</em></strong> 使用，例如视障人士的使用</li>
-<li>主要用于屏幕阅读器的使用，它将描述这个应用程序而不需要查看屏幕</li>
-</ul>
-<p>阅读到这里，如果你的应用程序主要用于视障人士，这是多么的重要。</p>
-<h2 id="如何在-Flutter-中使用"><a href="#如何在-Flutter-中使用" class="headerlink" title="如何在 Flutter 中使用"></a>如何在 Flutter 中使用</h2><p>当在 Flutter 中渲染 Widget 树时，它还会维护第二个树，称为 <strong><em>Semantics Tree</em></strong>。它通常被用在移动辅助设备上，例如Android TalkBack 或者 iOS VoiceOver 。</p>
-<p>Semantics Tree的每一个节点都是 SemanticsNode，它可能对应一个或者一组Widgets。</p>
-<p>每个 SemanticsNode 都链接到一个 SemanticsConfiguration， 通过一系列的属性告诉移动辅助设备: 如何描述节点、 如何配合节点的工作。</p>
-<h2 id="SemanticsConfiguration"><a href="#SemanticsConfiguration" class="headerlink" title="SemanticsConfiguration"></a>SemanticsConfiguration</h2><p>描述与之相关联的 SemanticsConfiguration 的语义信息，一下是部分属性（详情参阅 <a href="https://docs.flutter.io/flutter/semantics/SemanticsConfiguration-class.html" target="_blank" rel="noopener">官方文档</a>）</p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>decreasedValue</td>
-<td>执行减少操作所产生的值（例如滑块）</td>
-</tr>
-<tr>
-<td>increasedValue</td>
-<td>执行增加操作所产生的值（例如滑块）</td>
-</tr>
-<tr>
-<td>isButton</td>
-<td>这个节点是不是按钮</td>
-</tr>
-<tr>
-<td>isChecked</td>
-<td>是否是复选框，是否被选中</td>
-</tr>
-<tr>
-<td>isEnabled</td>
-<td>是否允许使用</td>
-</tr>
-<tr>
-<td>isFocused</td>
-<td>是否获得到焦点</td>
-</tr>
-<tr>
-<td>isHeader</td>
-<td>是否是Header节点 </td>
-</tr>
-<tr>
-<td>isSelected</td>
-<td>是否是选择节点</td>
-</tr>
-<tr>
-<td>isTextField</td>
-<td>是否是text field节点</td>
-</tr>
-<tr>
-<td>hint</td>
-<td>对在此节点上执行操作的结果的简述</td>
-</tr>
-<tr>
-<td>label</td>
-<td>节点的描述</td>
-</tr>
-<tr>
-<td>value</td>
-<td>value值的文本描述</td>
-</tr>
-</tbody>
-</table>
-<h2 id="隐式带有语义的Flutter小部件"><a href="#隐式带有语义的Flutter小部件" class="headerlink" title="隐式带有语义的Flutter小部件"></a>隐式带有语义的Flutter小部件</h2><p>大多数Flutter小部件都隐式的定义了 Semantics ，因为他们可能都直接或者间接的在 Screen Reader 引擎中被使用。</p>
-<p>为了说明这一点，下面是一段摘录自 Flutter 源码的关于 Button 的部分：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_RawMaterialButtonState</span> <span class="keyword">extends</span> <span class="title">State&lt;RawMaterialButton&gt;</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="type">Widget</span> build(<span class="type">BuildContext</span> context) &#123;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">Semantics</span>(</span><br><span class="line">      container: <span class="literal">true</span>,</span><br><span class="line">      button: <span class="literal">true</span>,</span><br><span class="line">      enabled: widget.enabled,</span><br><span class="line">      child: <span class="keyword">new</span> <span class="type">ConstrainedBox</span>(</span><br><span class="line">        constraints: widget.constraints,</span><br><span class="line">        child: <span class="keyword">new</span> <span class="type">Material</span>(</span><br><span class="line">          ...</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="如何定义Semantics"><a href="#如何定义Semantics" class="headerlink" title="如何定义Semantics"></a>如何定义Semantics</h2><p>有时定义屏幕的一部分便于移动设备辅助技术进行描述，是十分有趣的。</p>
-<p>在这些情况下，只需使用以下部件作为字部件的容器：</p>
-<ul>
-<li><strong><em>Semantics</em></strong>， 只想描述一个特定的小部件的语义使用。</li>
-<li><strong><em>MergeSemantics</em></strong>， 当描述使用一组小部件时使用。在这种情况，定义在这个子树行上的节点的语义将会合并为一个语义。这对于重组语义这是十分有用的，然而在语义冲突的情况，结果可能是无意义的。</li>
-</ul>
-<h2 id="单个Semantics"><a href="#单个Semantics" class="headerlink" title="单个Semantics"></a>单个Semantics</h2><p>用于定义语义的类是Semantics。这个类有2个构造函数：一个是冗长的，一个是简洁的。<br>下面是定义语义的两种方法，解释如下：<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">override</span></span><br><span class="line"><span class="function">Widget <span class="title">build</span>(<span class="params">BuildContext context</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">bool</span> toBeMergedWithAncestors = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">bool</span> allowDescendantsToAddSemantics = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Semantics(</span><br><span class="line">    container: toBeMergedWithAncestors,</span><br><span class="line">    explicitChildNodes: allowDescendantsToAddSemantics,</span><br><span class="line">    ...(list of all properties)...</span><br><span class="line"></span><br><span class="line">    child: ...</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">override</span></span><br><span class="line"><span class="function">Widget <span class="title">build</span>(<span class="params">BuildContext context</span>)</span>&#123;</span><br><span class="line">  SemanticsProperties properties = <span class="keyword">new</span> SemanticsProperties(...);</span><br><span class="line">  <span class="keyword">bool</span> isContainer = toBeMergedWithAncestors;</span><br><span class="line">  <span class="keyword">bool</span> explicitChildNodes = allowDescendantsToAddSemantics;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Semantics.fromProperties(</span><br><span class="line">    container: isContainer,</span><br><span class="line">    explicitChildNodes: explicitChildNodes,</span><br><span class="line">    properties: properties,</span><br><span class="line">    child: ...</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>默认值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>container</td>
-<td>false</td>
-<td>如果该值为true，将向语义树添加一个新的SemanticsNode，从而使该语义不会与祖先的语义合并。如果值为假，则此语义将与祖先的语义合并</td>
-</tr>
-<tr>
-<td>explicitChildNodes</td>
-<td>false</td>
-<td>表明是否允许此小部件的后代向该小部件的SemanticsNode添加语义信息</td>
-</tr>
-</tbody>
-</table>
-<h2 id="如何没有语义"><a href="#如何没有语义" class="headerlink" title="如何没有语义?"></a>如何没有语义?</h2><p>有时候，屏幕上只具有装饰性、对用户不重要的部分，您可能根本不需要任何语义。</p>
-<p>在这种情况下，您需要使用 <strong><em>ExcludeSemantics</em></strong> 类来移除这个小部件的所有后代的语义。其语法如下:<br> <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">override</span></span><br><span class="line"><span class="function">Widget <span class="title">build</span>(<span class="params">BuildContext context</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">bool</span> alsoExcludeThisWidget = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> ExcludeSemantics(</span><br><span class="line">    excluding: alsoExcludeThisWidget,</span><br><span class="line">    child: ...</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>exclude属性(默认值:true)告诉系统您是否也希望这个小部件被排除在语义树之外。</p>
-<h2 id="如何将小部件语义重组成单一语义"><a href="#如何将小部件语义重组成单一语义" class="headerlink" title="如何将小部件语义重组成单一语义?"></a>如何将小部件语义重组成单一语义?</h2><p>在某些情况下，您可能还希望重组一组小部件的所有语义成单一语义。<br>例如，在 一个由 label 和 checkbox（复选框） 组成的 功能块中，且每个复选框定义自己的语义的情况下，如果用户按下该块，移动设备辅助技术将提供与整个功能块相关的帮助信息，而不是功能块中的每个小部件的信息。</p>
-<p>在这种情况下你应该使用 MergeSemantics 类.</p>
-<blockquote>
-<p>WARNING<br>Be very careful when you want to merge the Semantics since if you have any conflicting Semantics, this might result in becoming nonsensical for the user. For example, if you have a block made up of several checkboxes, each of them having different statuses (checked and not checked), the resulting Semantics status will be checked, misleading the user.</p>
-</blockquote>
-<p>当您想合并语义时要非常小心，因为如果您有任何冲突的语义，这可能会导致语义对用户来说变得毫无意义。例如，如果您有一个由几个复选框组成的块，每个复选框都有不同的状态(选中和未选中)，那么结果的语义状态将被选中，从而误导用户。</p>
-<h2 id="如何调试语义"><a href="#如何调试语义" class="headerlink" title="如何调试语义?"></a>如何调试语义?</h2><p>最后，如果希望调试应用程序的语义，可以将MaterialApp的<strong><em>showSemanticsDebugger</em></strong> 属性设置 为true。这将强制Flutter生成一个可视化语义树。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">void main()&#123;</span><br><span class="line">  runApp(<span class="keyword">new</span> <span class="type">MyApp</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  _MyAppState createState() =&gt; <span class="keyword">new</span> _MyAppState();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_MyAppState</span> <span class="keyword">extends</span> <span class="title">State&lt;MyApp&gt;</span> </span>&#123;</span><br><span class="line">  <span class="comment">// This widget is the root of your application.</span></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="type">Widget</span> build(<span class="type">BuildContext</span> context) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">MaterialApp</span>(</span><br><span class="line">      title: <span class="keyword">new</span> <span class="type">Text</span>(<span class="symbol">'My</span> <span class="type">Semantics</span> <span class="type">Test</span> <span class="type">Application</span>'),</span><br><span class="line">      showSemanticsDebugger: <span class="literal">true</span>,</span><br><span class="line">      theme: <span class="keyword">new</span> <span class="type">ThemeData</span>(</span><br><span class="line">        primarySwatch: <span class="type">Colors</span>.blue,</span><br><span class="line">      ),</span><br><span class="line">      home: <span class="keyword">new</span> <span class="type">FirstScreen</span>(),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果您希望某天发布应用程序，那么考虑语义非常重要，因为移动用户可能会打开他们的手机的移动设备辅助技术并使用您的应用程序。如果您的应用程序还没有为这项技术做好准备，则可能存在无法使用该技术的风险。</p>
-
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/01/25/Flutter-Semantics-控件/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -599,7 +492,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/25/Flutter-GridView-控件/">
+    <link itemprop="mainEntityOfPage" href="https://ranna520.github.io/2019/01/25/Flutter-GridView-控件/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aries">
@@ -767,7 +660,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/24/Flutter项目开发小结（一）/">
+    <link itemprop="mainEntityOfPage" href="https://ranna520.github.io/2019/01/24/Flutter项目开发小结（一）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aries">
@@ -929,7 +822,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/11/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://ranna520.github.io/2019/01/11/hello-world/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aries">
