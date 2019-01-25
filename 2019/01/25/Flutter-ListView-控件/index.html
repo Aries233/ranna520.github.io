@@ -96,24 +96,24 @@
 
 
 
-  <meta name="description" content="使用 Flutter 开发已经一段时间，对于这段时间遇到的问题做一个小结。 路由flutter中的默认导航分成两种，一种是命名的路由，一种是构建路由。 命名路由：缺点是不能传递参数这种路由需要一开始现在创建App的时候定义Route">
+  <meta name="description" content="ListView——线性排列的可滚动列表小部件。 如果为非null，则itemExtent强制子项在滚动方向上具有给定范围。指定itemExtent比让子项自己确定范围更有效，因为滚动机制可以利用子项的范围预知来节省工作，例如当滚动位置发生剧烈变化时。 构造ListView有四个选项：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Flutter项目开发小结（一）">
-<meta property="og:url" content="https://ranna520.github.io/2019/01/24/Flutter项目开发小结（一）/index.html">
+<meta property="og:title" content="Flutter-ListView-控件">
+<meta property="og:url" content="https://ranna520.github.io/2019/01/25/Flutter-ListView-控件/index.html">
 <meta property="og:site_name" content="Aries&#39;s Blog">
-<meta property="og:description" content="使用 Flutter 开发已经一段时间，对于这段时间遇到的问题做一个小结。 路由flutter中的默认导航分成两种，一种是命名的路由，一种是构建路由。 命名路由：缺点是不能传递参数这种路由需要一开始现在创建App的时候定义Route">
+<meta property="og:description" content="ListView——线性排列的可滚动列表小部件。 如果为非null，则itemExtent强制子项在滚动方向上具有给定范围。指定itemExtent比让子项自己确定范围更有效，因为滚动机制可以利用子项的范围预知来节省工作，例如当滚动位置发生剧烈变化时。 构造ListView有四个选项：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-24T15:01:17.909Z">
+<meta property="og:updated_time" content="2019-01-25T05:09:09.542Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Flutter项目开发小结（一）">
-<meta name="twitter:description" content="使用 Flutter 开发已经一段时间，对于这段时间遇到的问题做一个小结。 路由flutter中的默认导航分成两种，一种是命名的路由，一种是构建路由。 命名路由：缺点是不能传递参数这种路由需要一开始现在创建App的时候定义Route">
+<meta name="twitter:title" content="Flutter-ListView-控件">
+<meta name="twitter:description" content="ListView——线性排列的可滚动列表小部件。 如果为非null，则itemExtent强制子项在滚动方向上具有给定范围。指定itemExtent比让子项自己确定范围更有效，因为滚动机制可以利用子项的范围预知来节省工作，例如当滚动位置发生剧烈变化时。 构造ListView有四个选项：">
 
 
 
 
 
 
-  <link rel="canonical" href="https://ranna520.github.io/2019/01/24/Flutter项目开发小结（一）/">
+  <link rel="canonical" href="https://ranna520.github.io/2019/01/25/Flutter-ListView-控件/">
 
 
 
@@ -123,7 +123,7 @@
   };
 </script>
 
-  <title>Flutter项目开发小结（一） | Aries's Blog</title>
+  <title>Flutter-ListView-控件 | Aries's Blog</title>
   
 
 
@@ -321,7 +321,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ranna520.github.io/2019/01/24/Flutter项目开发小结（一）/">
+    <link itemprop="mainEntityOfPage" href="https://ranna520.github.io/2019/01/25/Flutter-ListView-控件/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aries">
@@ -338,7 +338,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Flutter项目开发小结（一）
+          <h1 class="post-title" itemprop="name headline">Flutter-ListView-控件
 
               
             
@@ -364,7 +364,7 @@
                 
               
 
-              <time title="创建时间：2019-01-24 22:41:24 / 修改时间：23:01:17" itemprop="dateCreated datePublished" datetime="2019-01-24T22:41:24+08:00">2019-01-24</time>
+              <time title="创建时间：2019-01-25 13:06:43 / 修改时间：13:09:09" itemprop="dateCreated datePublished" datetime="2019-01-25T13:06:43+08:00">2019-01-25</time>
             
 
             
@@ -420,9 +420,111 @@
       
 
       
-        <p>使用 Flutter 开发已经一段时间，对于这段时间遇到的问题做一个小结。</p>
-<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>flutter中的默认导航分成两种，一种是命名的路由，一种是构建路由。</p>
-<p>命名路由：缺点是不能传递参数<br>这种路由需要一开始现在创建App的时候定义Route</p>
+        <p>ListView——线性排列的可滚动列表小部件。</p>
+<p>如果为非null，则<a href="https://docs.flutter.io/flutter/widgets/ListView/itemExtent.html" target="_blank" rel="noopener">itemExtent</a>强制子项在滚动方向上具有给定范围。指定<a href="https://docs.flutter.io/flutter/widgets/ListView/itemExtent.html" target="_blank" rel="noopener">itemExtent</a>比让子项自己确定范围更有效，因为滚动机制可以利用子项的范围预知来节省工作，例如当滚动位置发生剧烈变化时。</p>
+<p>构造<a href="https://docs.flutter.io/flutter/widgets/ListView-class.html" target="_blank" rel="noopener">ListView</a>有四个选项：<br><a id="more"></a></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>解释 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/dart-core/List-class.html" target="_blank" rel="noopener">List <widget></widget></a></td>
+<td>默认构造函数采用子类的显式。此构造函数适用于具有少量子项的列表视图，因为构造<a href="https://docs.flutter.io/flutter/dart-core/List-class.html" target="_blank" rel="noopener">List</a>需要为可能在列表视图中显示的每个子项执行工作，而不仅仅是那些实际可见的子项。</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/ListView/ListView.builder.html" target="_blank" rel="noopener">ListView.builder</a></td>
+<td>它构造函数采用<a href="https://docs.flutter.io/flutter/widgets/IndexedWidgetBuilder.html" target="_blank" rel="noopener">IndexedWidgetBuilder</a>它根据需要构建子项。此构造函数适用于具有大量（或无限）子项数的列表视图，因为仅为实际可见的子项调用构建器。</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/ListView/ListView.separated.html" target="_blank" rel="noopener">ListView.separated</a></td>
+<td>它的构造函数有两个<a href="https://docs.flutter.io/flutter/widgets/IndexedWidgetBuilder.html" target="_blank" rel="noopener">IndexedWidgetBuilder</a> 构建器： <code>itemBuilder</code>根据需要构建子项，<code>separatorBuilder</code> 类似地构建出现在子项之间的分隔子项。此构造函数适用于具有固定数量子项的列表视图。</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/ListView/ListView.custom.html" target="_blank" rel="noopener">ListView.custom</a></td>
+<td>构造需要<a href="https://docs.flutter.io/flutter/widgets/SliverChildDelegate-class.html" target="_blank" rel="noopener">SliverChildDelegate</a>提供自定义子项的其他方面的能力。例如，<a href="https://docs.flutter.io/flutter/widgets/SliverChildDelegate-class.html" target="_blank" rel="noopener">SliverChildDelegate</a>可以控制用于估计实际上不可见的子项大小的算法。</td>
+</tr>
+</tbody>
+</table>
+<p>要控制滚动视图的初始滚动偏移，请为 <a href="https://docs.flutter.io/flutter/widgets/ScrollView/controller.html" target="_blank" rel="noopener">controller</a>提供其<a href="https://docs.flutter.io/flutter/widgets/ScrollController/initialScrollOffset.html" target="_blank" rel="noopener">ScrollController.initialScrollOffset</a>属性集。</p>
+<p>ListView.builder</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>解释 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/foundation/Key-class.html" target="_blank" rel="noopener">Key</a> key</td>
+<td>key 值</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/painting/Axis-class.html" target="_blank" rel="noopener">Axis</a> scrollDirection：Axis.vertical</td>
+<td>滚动方向</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> reverse：false</td>
+<td>是否反向滚动</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/ScrollController-class.html" target="_blank" rel="noopener">ScrollController</a> controller</td>
+<td>滚动控制器</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> primary</td>
+<td><a href="https://docs.flutter.io/flutter/widgets/ScrollView/primary.html" target="_blank" rel="noopener">是否是与父级PrimaryScrollController关联的主滚动视图。如果primary为true，controller必须设置</a></td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/ScrollPhysics-class.html" target="_blank" rel="noopener">ScrollPhysics</a> physics</td>
+<td>[物理滚动方式]</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> shrinkWrap：false</td>
+<td><a href="https://docs.flutter.io/flutter/widgets/ScrollView/shrinkWrap.html" target="_blank" rel="noopener">滚动方向上的滚动视图的范围是否应由所查看的内容决定。</a></td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/painting/EdgeInsetsGeometry-class.html" target="_blank" rel="noopener">EdgeInsetsGeometry</a> padding</td>
+<td>滚动视图与子项之间的内边距</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/dart-core/double-class.html" target="_blank" rel="noopener">double</a> itemExtent</td>
+<td>子项范围</td>
+</tr>
+<tr>
+<td>@ <a href="https://docs.flutter.io/flutter/widgets/IndexedWidgetBuilder.html" target="_blank" rel="noopener">required</a> indexedWidgetBuilder itemBuilder</td>
+<td>位置构建器</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/dart-core/int-class.html" target="_blank" rel="noopener">int</a> itemCount</td>
+<td>子项的个数</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> addAutomaticKeepAlives：true</td>
+<td>对应于 <a href="https://docs.flutter.io/flutter/widgets/SliverChildBuilderDelegate/addAutomaticKeepAlives.html" target="_blank" rel="noopener">SliverChildBuilderDelegate.addAutomaticKeepAlives</a>属性。即是否将每个子项包装在<a href="https://docs.flutter.io/flutter/widgets/AutomaticKeepAlive-class.html" target="_blank" rel="noopener">AutomaticKeepAlive中</a>。</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> addRepaintBoundaries：true</td>
+<td>对应于 <a href="https://docs.flutter.io/flutter/widgets/SliverChildBuilderDelegate/addRepaintBoundaries.html" target="_blank" rel="noopener">SliverChildBuilderDelegate.addRepaintBoundaries</a>属性。是否将每个子项包装在<a href="https://docs.flutter.io/flutter/widgets/RepaintBoundary-class.html" target="_blank" rel="noopener">RepaintBoundary中</a></td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> addSemanticIndexes：true</td>
+<td>对应于 <a href="https://docs.flutter.io/flutter/widgets/SliverChildBuilderDelegate/addSemanticIndexes.html" target="_blank" rel="noopener">SliverChildBuilderDelegate.addSemanticIndexes</a>属性。是否将每个子项包装在<a href="https://docs.flutter.io/flutter/widgets/IndexedSemantics-class.html" target="_blank" rel="noopener">IndexedSemantics中</a>。</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/dart-core/double-class.html" target="_blank" rel="noopener">double</a> cacheExtent</td>
+<td><a href="https://docs.flutter.io/flutter/widgets/ScrollView/cacheExtent.html" target="_blank" rel="noopener">视口在可见区域之前和之后有一个区域，用于缓存在用户滚动时即将变为可见的项目。</a></td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/dart-core/int-class.html" target="_blank" rel="noopener">int</a> semanticChildCount</td>
+<td><a href="https://docs.flutter.io/flutter/widgets/ScrollView/semanticChildCount.html" target="_blank" rel="noopener">提供语义信息的孩子的数量</a></td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -456,7 +558,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="https://ranna520.github.io/2019/01/24/Flutter项目开发小结（一）/" title="Flutter项目开发小结（一）">https://ranna520.github.io/2019/01/24/Flutter项目开发小结（一）/</a>
+    <a href="https://ranna520.github.io/2019/01/25/Flutter-ListView-控件/" title="Flutter-ListView-控件">https://ranna520.github.io/2019/01/25/Flutter-ListView-控件/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -476,8 +578,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/11/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/01/25/Flutter-Semantics-控件/" rel="next" title="Flutter-Semantics-控件">
+                <i class="fa fa-chevron-left"></i> Flutter-Semantics-控件
               </a>
             
           </div>
@@ -486,8 +588,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/25/Flutter-GridView-控件/" rel="prev" title="Flutter-GridView-控件">
-                Flutter-GridView-控件 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/25/Flutter-TextFormField-控件/" rel="prev" title="Flutter-TextFormField-控件">
+                Flutter-TextFormField-控件 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -533,17 +635,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -602,23 +695,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#路由"><span class="nav-number">1.</span> <span class="nav-text">路由</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       

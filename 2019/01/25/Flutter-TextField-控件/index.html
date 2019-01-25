@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="一个material design的文本字段。   文本字段允许用户使用硬件键盘或屏幕键盘输入文本。 只要用户更改字段中的文本，文本字段就会调用 onChanged 回调函数。如果用户指示他们已完成在字段中键入（例如，通过按下软键盘上的按钮），则文本字段调用 onSubmitted 回调函数。 要控制文本字段中显示的文本，请使用 controller控制器。例如，要设置文本字段的初始值，请使用已包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter-TextField-控件">
+<meta property="og:url" content="https://ranna520.github.io/2019/01/25/Flutter-TextField-控件/index.html">
+<meta property="og:site_name" content="Aries&#39;s Blog">
+<meta property="og:description" content="一个material design的文本字段。   文本字段允许用户使用硬件键盘或屏幕键盘输入文本。 只要用户更改字段中的文本，文本字段就会调用 onChanged 回调函数。如果用户指示他们已完成在字段中键入（例如，通过按下软键盘上的按钮），则文本字段调用 onSubmitted 回调函数。 要控制文本字段中显示的文本，请使用 controller控制器。例如，要设置文本字段的初始值，请使用已包">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-01-25T07:36:02.553Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flutter-TextField-控件">
+<meta name="twitter:description" content="一个material design的文本字段。   文本字段允许用户使用硬件键盘或屏幕键盘输入文本。 只要用户更改字段中的文本，文本字段就会调用 onChanged 回调函数。如果用户指示他们已完成在字段中键入（例如，通过按下软键盘上的按钮），则文本字段调用 onSubmitted 回调函数。 要控制文本字段中显示的文本，请使用 controller控制器。例如，要设置文本字段的初始值，请使用已包">
+
+
+
+
+
+
+  <link rel="canonical" href="https://ranna520.github.io/2019/01/25/Flutter-TextField-控件/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Flutter-TextField-控件 | Aries's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aries's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ranna520.github.io/2019/01/25/Flutter-TextField-控件/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aries">
+      <meta itemprop="description" content="记录成长的过程">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aries's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Flutter-TextField-控件
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-25 13:12:54 / 修改时间：15:36:02" itemprop="dateCreated datePublished" datetime="2019-01-25T13:12:54+08:00">2019-01-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一个material design的文本字段。 </p>
+<ul>
+<li>文本字段允许用户使用硬件键盘或屏幕键盘输入文本。 只要用户更改字段中的文本，文本字段就会调用 <a href="https://docs.flutter.io/flutter/material/TextField/onChanged.html" target="_blank" rel="noopener">onChanged</a> 回调函数。如果用户指示他们已完成在字段中键入（例如，通过按下软键盘上的按钮），则文本字段调用 <a href="https://docs.flutter.io/flutter/material/TextField/onSubmitted.html" target="_blank" rel="noopener">onSubmitted</a> 回调函数。</li>
+<li>要控制文本字段中显示的文本，请使用 <a href="https://docs.flutter.io/flutter/material/TextField/controller.html" target="_blank" rel="noopener">controller</a><br>控制器。例如，要设置文本字段的初始值，请使用已包含某些文本的controller。controller还可以控制选择和合成区域（并观察文本，选择和合成区域的变化）。<a id="more"></a></li>
+<li>默认情况下，文本字段具有在文本字段下方绘制分隔符的装饰（即下划线）。您可以使用decoration属性来控制装饰，例如通过添加label或icon。如果将decoration属性设置为null，则将删除所有装饰，包括为了装饰引入的额外填充（padding）以节省标签的空间。如果 <a href="https://docs.flutter.io/flutter/material/TextField/decoration.html" target="_blank" rel="noopener">decoration</a> 非空（这是默认设置），则文本字段要求其祖先之一为“ <a href="https://docs.flutter.io/flutter/material/Material-class.html" target="_blank" rel="noopener">Material</a> ”窗口小部件。点击TextField时，会触发在材质上绘制的墨水飞溅效果，请参阅ThemeData.splashFactory进行配置。</li>
+<li>[maxLines]属性可以设置为null,删除对行数的限制。默认情况下,它是1,这意味着这是一个单行的文本字段。(maxLines)不能是零。</li>
+<li>(maxLength)属性默认设置为零,这意味着文本字段中允许的字符数是不受限制的。如果设置了[maxLength]，将在字段下面显示一个字符计数器，显示输入了多少字符以及允许输入多少字符。在输入[maxLength]字符后，将忽略额外的输入，除非[maxLengthEnforced]设置为false。TextField使用[LengthLimitingTextInputFormatter]强制将长度延长，这是在提供的(inputformatter)之后进行计算的，如果有的话。[maxLength]值必须为null或大于0。  </li>
+<li>如果将[maxLengthEnforced]设置为false，则可能输入大于[maxLength]的字符，超过限制时，错误计数器和分配器(divider)将切换到[decoration.errorStyle]。</li>
+<li>[textAlign], [autofocus], [obscureText], [autocorrect], [maxLengthEnforced], [scrollPadding], [maxLines], [maxLength],and [enableInteractiveSelection] 这些参数不能为空</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>解释 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>controller</td>
+<td><a href="https://docs.flutter.io/flutter/widgets/TextEditingController-class.html" target="_blank" rel="noopener">TextEditingController</a></td>
+<td>控制正在编辑的文本。如果为null，则此小部件将创建自己的<a href="https://docs.flutter.io/flutter/widgets/TextEditingController-class.html" target="_blank" rel="noopener">TextEditingController</a>。</td>
+</tr>
+<tr>
+<td>focusNode</td>
+<td>focusNode</td>
+<td>控制这个小部件是否有键盘焦点。如果是null,这个小部件将创建自己的FocusNode。</td>
+</tr>
+<tr>
+<td>decoration</td>
+<td>InputDecoration</td>
+<td>在文本字段周围显示的装饰。默认情况下，在文本字段下绘制一条水平线，但可以其配置为显示图标icon、标签label、提示文本hint text和错误文本error text。指定null以完全删除装饰(包括由装饰引入的额外填充以节省标签空间)。默认为InputDecoration()</td>
+</tr>
+<tr>
+<td>keyboardType</td>
+<td>TextInputType</td>
+<td>用于指定编辑文本的键盘类型。如果[maxLines]为1 则默认为[TextInputType.text]，[否则]为 [TextInputType.multiline]。</td>
+</tr>
+<tr>
+<td>textInputAction</td>
+<td>TextInputAction</td>
+<td>用于键盘的操作按钮类型。 如果keyboardType为TextInputType.multiline，则默认为TextInputAction.newline，否则为TextInputAction.done。</td>
+</tr>
+<tr>
+<td>textCapitalization</td>
+<td>TextCapitalization</td>
+<td>配置平台键盘如何选择大写或小写键盘。 仅支持文本键盘，其他键盘类型将忽略此配置。资本化是区域设置感知的。 默认为TextCapitalization.none。不能为空。</td>
+</tr>
+<tr>
+<td>style</td>
+<td>TextStyle</td>
+<td>用于正在编辑的文本的样式。 此文本样式也用作装饰的基本样式。 如果为null，则默认为当前主题的子标题文本样式。</td>
+</tr>
+<tr>
+<td>textAlign</td>
+<td>TextAlign</td>
+<td>文本应如何水平对齐。 默认为TextAlign.start，不能为null。</td>
+</tr>
+<tr>
+<td>autofocus</td>
+<td>bool</td>
+<td>如果没有别的内容已经获得焦点，则该文本字段是否获取焦点。如果为true，打开这个文本框立刻获得焦点。否则，只有在用户点击文本字段后才会获取焦点，显示键盘。默认值为false，不能为空。</td>
+</tr>
+<tr>
+<td>obscureText</td>
+<td>bool</td>
+<td>是否隐藏正在编辑的文本（例如，用于密码）。 当此参数设置为true时，文本字段中的所有字符都将替换为U + 2022 BULLET字符（•）。 默认为false，不能为空。</td>
+</tr>
+<tr>
+<td>autocorrect</td>
+<td>bool</td>
+<td>是否启用自动更正。 默认为true，不能为空。</td>
+</tr>
+<tr>
+<td>maxLines</td>
+<td>int</td>
+<td>文本展开的最大行数，必要时可换行。如果这是1(默认值)，文本将不会换行，而是将水平滚动。如果这是null的，行数没有限制。如果不是null,值必须大于零。</td>
+</tr>
+<tr>
+<td>maxLength</td>
+<td>int</td>
+<td>文本字段中允许的最大字符数（Unicode标量值）。如果设置，字段计数器将显示在字段下方，显示已输入的字符数和允许的字数。输入<a href="https://docs.flutter.io/flutter/material/TextField/maxLength.html" target="_blank" rel="noopener">maxLength</a>字符后，将忽略其他输入，除非<a href="https://docs.flutter.io/flutter/material/TextField/maxLengthEnforced.html" target="_blank" rel="noopener">maxLengthEnforced</a>设置为false。TextField使用<a href="https://docs.flutter.io/flutter/services/LengthLimitingTextInputFormatter-class.html" target="_blank" rel="noopener">LengthLimitingTextInputFormatter</a>强制执行长度，该值在提供的<a href="https://docs.flutter.io/flutter/material/TextField/inputFormatters.html" target="_blank" rel="noopener">inputFormatters</a>（如果有）之后计算。该值必须为null或大于零。如果设置为null（默认值），则允许的字符数没有限制。空格字符（例如换行符，空格，制表符）包含在字符数中。如果<a href="https://docs.flutter.io/flutter/material/TextField/maxLengthEnforced.html" target="_blank" rel="noopener">maxLengthEnforced</a>设置为false，则 可以输入多个<a href="https://docs.flutter.io/flutter/material/TextField/maxLength.html" target="_blank" rel="noopener">maxLength</a>字符，但错误计数器和分隔符将切换到<code>decoration.errorStyle</code>超出限制时。</td>
+</tr>
+<tr>
+<td>maxLengthEnforced</td>
+<td>bool</td>
+<td>如果为真，则阻止字段允许超过maxLength字符。如果设置了maxLength, maxLengthEnforced表示是否执行限制，或者仅在超过maxLength时提供字符计数器和警告。</td>
+<td></td>
+</tr>
+<tr>
+<td>onChanged</td>
+<td>ValueChanged<string></string></td>
+<td>当正在编辑的文本发生更改时调用</td>
+<td></td>
+</tr>
+<tr>
+<td>onEditingComplete</td>
+<td>VoidCallback</td>
+<td>当用户提交可编辑内容时调用(例如，用户按下键盘上的“完成”按钮)。onEditingComplete的默认实现根据情况执行两种不同的行为:当按下完成动作时，例如“完成”、“go”、“发送”或“搜索”，用户的内容被提交给控制器（controller），然后将焦点放弃。当一个非完成动作被按下，比如”下一个”或”上一个”时，用户的内容被提交给控制器，但焦点不会被放弃，因为开发者可能会想立刻将焦点转移到提交的另一个输入组件上。</td>
+</tr>
+<tr>
+<td>onSubmitted</td>
+<td>ValueChanged<string></string></td>
+<td>当用户指示他们已完成编辑字段中的文本时调用</td>
+<td></td>
+</tr>
+<tr>
+<td>inputFormatters</td>
+<td>List<textinputformatter></textinputformatter></td>
+<td>可选的输入验证和格式化覆盖。当文本输入发生变化时，格式化程序按照提供的顺序运行。</td>
+<td></td>
+</tr>
+<tr>
+<td>enabled</td>
+<td>bool</td>
+<td>如果为false, textfield将被“禁用”:它将忽略tap，其装饰将以灰色呈现。如果非null这个属性覆盖了<a href="https://docs.flutter.io/flutter/material/TextField/decoration.html" target="_blank" rel="noopener">decoration</a>‘中Decoration.enabled的装饰功能。</td>
+</tr>
+<tr>
+<td>cursorWidth</td>
+<td>double</td>
+<td>光标的厚度。 默认为2.0</td>
+</tr>
+<tr>
+<td>cursorRadius</td>
+<td>Radius</td>
+<td>光标的角应该是多圆的。 默认情况下，光标没有半径（Radius）。</td>
+</tr>
+<tr>
+<td>cursorColor</td>
+<td>Color</td>
+<td>绘制光标时使用的颜色。cursorColor当为null时，默认为主题。</td>
+</tr>
+<tr>
+<td>keyboardAppearance</td>
+<td>Brightness</td>
+<td>键盘的外观。此设置仅适用于iOS设备。如果未设置，则默认为<a href="https://docs.flutter.io/flutter/material/ThemeData/primaryColorBrightness.html" target="_blank" rel="noopener">ThemeData.primaryColorBrightness</a>的亮度。</td>
+</tr>
+<tr>
+<td>scrollPadding</td>
+<td>EdgeInsets</td>
+<td>当Textfield滚动到视图中时，将填充配置到<a href="https://docs.flutter.io/flutter/widgets/Scrollable-class.html" target="_blank" rel="noopener">Scrollable</a>周围的边缘。当此窗口小部件获得焦点并且不完全可见时（例如，部分地从屏幕滚动或被键盘重叠），则它将通过滚动周围的<a href="https://docs.flutter.io/flutter/widgets/Scrollable-class.html" target="_blank" rel="noopener">Scrollable</a>（如果存在）来尝试使其自身可见。此值控制在滚动后TextField将位于<a href="https://docs.flutter.io/flutter/widgets/Scrollable-class.html" target="_blank" rel="noopener">Scrollable</a>边缘的距离。默认为EdgeInserts.all（20.0）。</td>
+</tr>
+<tr>
+<td>enableInteractiveSelection</td>
+<td>bool</td>
+<td>如果为true，则长按此TextField将选择文本并显示剪切/复制/粘贴菜单，并且点击将移动文本插入符号。 默认为True。 如果为false，则将禁用大多数用于选择文本，复制和粘贴以及移动插入符号的辅助功能。</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Aries</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://ranna520.github.io/2019/01/25/Flutter-TextField-控件/" title="Flutter-TextField-控件">https://ranna520.github.io/2019/01/25/Flutter-TextField-控件/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/25/Flutter-TextFormField-控件/" rel="next" title="Flutter-TextFormField-控件">
+                <i class="fa fa-chevron-left"></i> Flutter-TextFormField-控件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/25/Flutter部分插件后续持续更新～/" rel="prev" title="Flutter部分插件后续持续更新～">
+                Flutter部分插件后续持续更新～ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Aries">
+            
+              <p class="site-author-name" itemprop="name">Aries</p>
+              <p class="site-description motion-element" itemprop="description">记录成长的过程</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aries</span>
+
+  
+  <div class="powered-by">
+  &nbsp;
+    <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+      本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+  </div>
+  
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

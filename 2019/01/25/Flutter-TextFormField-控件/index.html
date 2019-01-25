@@ -96,24 +96,24 @@
 
 
 
-  <meta name="description" content="使用 Flutter 开发已经一段时间，对于这段时间遇到的问题做一个小结。 路由flutter中的默认导航分成两种，一种是命名的路由，一种是构建路由。 命名路由：缺点是不能传递参数这种路由需要一开始现在创建App的时候定义Route">
+  <meta name="description" content="一个FormField包含TextField,它将TextField小部件包装在FormField中。 表单(From)使一次进行保存、重置或验证多个字段变得更容易。要在没有表单(From)的情况下使用，请将GlobalKey传递给构造函数，并使用GlobalKey.currentState保存或重置表单字段。 指定控制器时，initialValue必须为null(默认值)。如果controlle">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Flutter项目开发小结（一）">
-<meta property="og:url" content="https://ranna520.github.io/2019/01/24/Flutter项目开发小结（一）/index.html">
+<meta property="og:title" content="Flutter-TextFormField-控件">
+<meta property="og:url" content="https://ranna520.github.io/2019/01/25/Flutter-TextFormField-控件/index.html">
 <meta property="og:site_name" content="Aries&#39;s Blog">
-<meta property="og:description" content="使用 Flutter 开发已经一段时间，对于这段时间遇到的问题做一个小结。 路由flutter中的默认导航分成两种，一种是命名的路由，一种是构建路由。 命名路由：缺点是不能传递参数这种路由需要一开始现在创建App的时候定义Route">
+<meta property="og:description" content="一个FormField包含TextField,它将TextField小部件包装在FormField中。 表单(From)使一次进行保存、重置或验证多个字段变得更容易。要在没有表单(From)的情况下使用，请将GlobalKey传递给构造函数，并使用GlobalKey.currentState保存或重置表单字段。 指定控制器时，initialValue必须为null(默认值)。如果controlle">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-24T15:01:17.909Z">
+<meta property="og:updated_time" content="2019-01-25T05:12:09.568Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Flutter项目开发小结（一）">
-<meta name="twitter:description" content="使用 Flutter 开发已经一段时间，对于这段时间遇到的问题做一个小结。 路由flutter中的默认导航分成两种，一种是命名的路由，一种是构建路由。 命名路由：缺点是不能传递参数这种路由需要一开始现在创建App的时候定义Route">
+<meta name="twitter:title" content="Flutter-TextFormField-控件">
+<meta name="twitter:description" content="一个FormField包含TextField,它将TextField小部件包装在FormField中。 表单(From)使一次进行保存、重置或验证多个字段变得更容易。要在没有表单(From)的情况下使用，请将GlobalKey传递给构造函数，并使用GlobalKey.currentState保存或重置表单字段。 指定控制器时，initialValue必须为null(默认值)。如果controlle">
 
 
 
 
 
 
-  <link rel="canonical" href="https://ranna520.github.io/2019/01/24/Flutter项目开发小结（一）/">
+  <link rel="canonical" href="https://ranna520.github.io/2019/01/25/Flutter-TextFormField-控件/">
 
 
 
@@ -123,7 +123,7 @@
   };
 </script>
 
-  <title>Flutter项目开发小结（一） | Aries's Blog</title>
+  <title>Flutter-TextFormField-控件 | Aries's Blog</title>
   
 
 
@@ -321,7 +321,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ranna520.github.io/2019/01/24/Flutter项目开发小结（一）/">
+    <link itemprop="mainEntityOfPage" href="https://ranna520.github.io/2019/01/25/Flutter-TextFormField-控件/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Aries">
@@ -338,7 +338,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Flutter项目开发小结（一）
+          <h1 class="post-title" itemprop="name headline">Flutter-TextFormField-控件
 
               
             
@@ -364,7 +364,7 @@
                 
               
 
-              <time title="创建时间：2019-01-24 22:41:24 / 修改时间：23:01:17" itemprop="dateCreated datePublished" datetime="2019-01-24T22:41:24+08:00">2019-01-24</time>
+              <time title="创建时间：2019-01-25 13:09:51 / 修改时间：13:12:09" itemprop="dateCreated datePublished" datetime="2019-01-25T13:09:51+08:00">2019-01-25</time>
             
 
             
@@ -420,9 +420,123 @@
       
 
       
-        <p>使用 Flutter 开发已经一段时间，对于这段时间遇到的问题做一个小结。</p>
-<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>flutter中的默认导航分成两种，一种是命名的路由，一种是构建路由。</p>
-<p>命名路由：缺点是不能传递参数<br>这种路由需要一开始现在创建App的时候定义Route</p>
+        <p>一个FormField包含TextField,它将TextField小部件包装在FormField中。</p>
+<p>表单(From)使一次进行保存、重置或验证多个字段变得更容易。要在没有表单(From)的情况下使用，请将GlobalKey传递给构造函数，并使用GlobalKey.currentState保存或重置表单字段。</p>
+<p>指定控制器时，initialValue必须为null(默认值)。如果controller为null，那么TextEditingController将被自动构造，其文本将初始化为initalValue或空字符串。如果这个FormField是滚动容器的一部分，该容器懒加载它的子对象，比如ListView或CustomScrollView，那么应该指定一个控制器。控制器的生命周期应该由滚动容器的有状态小部件祖先来管理。<br><a id="more"></a></p>
+<table>
+<thead>
+<tr>
+<th>类型 名称</th>
+<th>解释 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>    Key key</td>
+<td></td>
+</tr>
+<tr>
+<td>    this.controller</td>
+<td>控制正在编辑的文本。如果为空，这个小部件将创建自己的TextEditingController并使用initialValue初始化它的TextEditingController.text</td>
+</tr>
+<tr>
+<td>    String initialValue</td>
+<td>初始值</td>
+</tr>
+<tr>
+<td>    FocusNode focusNode</td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    InputDecoration decoration = const InputDecoration()</td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    TextInputType keyboardType</td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    TextCapitalization textCapitalization = TextCapitalization.none</td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    TextInputAction textInputAction</td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    TextStyle style</td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    TextAlign textAlign = TextAlign.start</td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    bool autofocus = false</td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    bool obscureText = false</td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    bool autocorrect = true</td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    bool autovalidate = false</td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    bool maxLengthEnforced = true</td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    int maxLines = 1</td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    int maxLength</td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    VoidCallback onEditingComplete</td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    ValueChanged<string> onFieldSubmitted</string></td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    FormFieldSetter<string> onSaved</string></td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    FormFieldValidator<string> validator</string></td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    List<textinputformatter> inputFormatters</textinputformatter></td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    bool enabled = true</td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    Brightness keyboardAppearance</td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    EdgeInsets scrollPadding = const EdgeInsets.all(20.0)</td>
+<td>见TextFile</td>
+</tr>
+<tr>
+<td>    bool enableInteractiveSelection = true</td>
+<td>见TextFile</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -456,7 +570,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="https://ranna520.github.io/2019/01/24/Flutter项目开发小结（一）/" title="Flutter项目开发小结（一）">https://ranna520.github.io/2019/01/24/Flutter项目开发小结（一）/</a>
+    <a href="https://ranna520.github.io/2019/01/25/Flutter-TextFormField-控件/" title="Flutter-TextFormField-控件">https://ranna520.github.io/2019/01/25/Flutter-TextFormField-控件/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -476,8 +590,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/11/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/01/25/Flutter-ListView-控件/" rel="next" title="Flutter-ListView-控件">
+                <i class="fa fa-chevron-left"></i> Flutter-ListView-控件
               </a>
             
           </div>
@@ -486,8 +600,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/25/Flutter-GridView-控件/" rel="prev" title="Flutter-GridView-控件">
-                Flutter-GridView-控件 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/25/Flutter-TextField-控件/" rel="prev" title="Flutter-TextField-控件">
+                Flutter-TextField-控件 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -533,17 +647,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -602,23 +707,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#路由"><span class="nav-number">1.</span> <span class="nav-text">路由</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
