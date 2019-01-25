@@ -96,23 +96,24 @@
 
 
 
-  <meta name="description" content="记录成长的过程">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Aries&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="原文链接：https://www.didierboelens.com/2018/07/semantics/ 这篇文章主要用来解释 Semantics 组件的作用，是译文 内容非原创 前言如果你看过一些有关于Flutter的内容，你有时注意到使用了 Semantics 或者 SemanticsConfiguration 组件，但是在官方文档中有关这些内容的叙述并不多。本文是对这个主题的介绍，并且展示">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter-Semantics-控件">
+<meta property="og:url" content="http://yoursite.com/2019/01/25/Flutter-Semantics-控件/index.html">
 <meta property="og:site_name" content="Aries&#39;s Blog">
-<meta property="og:description" content="记录成长的过程">
+<meta property="og:description" content="原文链接：https://www.didierboelens.com/2018/07/semantics/ 这篇文章主要用来解释 Semantics 组件的作用，是译文 内容非原创 前言如果你看过一些有关于Flutter的内容，你有时注意到使用了 Semantics 或者 SemanticsConfiguration 组件，但是在官方文档中有关这些内容的叙述并不多。本文是对这个主题的介绍，并且展示">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-01-25T04:31:50.360Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Aries&#39;s Blog">
-<meta name="twitter:description" content="记录成长的过程">
+<meta name="twitter:title" content="Flutter-Semantics-控件">
+<meta name="twitter:description" content="原文链接：https://www.didierboelens.com/2018/07/semantics/ 这篇文章主要用来解释 Semantics 组件的作用，是译文 内容非原创 前言如果你看过一些有关于Flutter的内容，你有时注意到使用了 Semantics 或者 SemanticsConfiguration 组件，但是在官方文档中有关这些内容的叙述并不多。本文是对这个主题的介绍，并且展示">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/01/25/Flutter-Semantics-控件/">
 
 
 
@@ -122,7 +123,7 @@
   };
 </script>
 
-  <title>Aries's Blog</title>
+  <title>Flutter-Semantics-控件 | Aries's Blog</title>
   
 
 
@@ -170,8 +171,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -208,7 +208,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
 
     
     
@@ -304,9 +304,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -338,10 +338,8 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/25/Flutter-Semantics-控件/" class="post-title-link" itemprop="url">Flutter-Semantics-控件</a>
+          <h1 class="post-title" itemprop="name headline">Flutter-Semantics-控件
+
               
             
           </h1>
@@ -422,9 +420,7 @@
       
 
       
-        
-          
-            <p>原文链接：<a href="https://www.didierboelens.com/2018/07/semantics/" target="_blank" rel="noopener">https://www.didierboelens.com/2018/07/semantics/</a></p>
+        <p>原文链接：<a href="https://www.didierboelens.com/2018/07/semantics/" target="_blank" rel="noopener">https://www.didierboelens.com/2018/07/semantics/</a></p>
 <p>这篇文章主要用来解释 Semantics 组件的作用，是译文 内容非原创</p>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>如果你看过一些有关于Flutter的内容，你有时注意到使用了 <strong><em>Semantics</em></strong> 或者 <strong><em>SemanticsConfiguration</em></strong> 组件，但是在官方文档中有关这些内容的叙述并不多。本文是对这个主题的介绍，并且展示考虑在您的 APP 中使用这类组件的重要性和一些有趣的内容。</p>
 <h2 id="简而言之——这是什么？"><a href="#简而言之——这是什么？" class="headerlink" title="简而言之——这是什么？"></a>简而言之——这是什么？</h2><p>在官方文档中是这样介绍 <strong><em>Semantics</em></strong> 类的：</p>
@@ -544,8 +540,6 @@
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">void main()&#123;</span><br><span class="line">  runApp(<span class="keyword">new</span> <span class="type">MyApp</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  _MyAppState createState() =&gt; <span class="keyword">new</span> _MyAppState();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_MyAppState</span> <span class="keyword">extends</span> <span class="title">State&lt;MyApp&gt;</span> </span>&#123;</span><br><span class="line">  <span class="comment">// This widget is the root of your application.</span></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="type">Widget</span> build(<span class="type">BuildContext</span> context) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="type">MaterialApp</span>(</span><br><span class="line">      title: <span class="keyword">new</span> <span class="type">Text</span>(<span class="symbol">'My</span> <span class="type">Semantics</span> <span class="type">Test</span> <span class="type">Application</span>'),</span><br><span class="line">      showSemanticsDebugger: <span class="literal">true</span>,</span><br><span class="line">      theme: <span class="keyword">new</span> <span class="type">ThemeData</span>(</span><br><span class="line">        primarySwatch: <span class="type">Colors</span>.blue,</span><br><span class="line">      ),</span><br><span class="line">      home: <span class="keyword">new</span> <span class="type">FirstScreen</span>(),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>如果您希望某天发布应用程序，那么考虑语义非常重要，因为移动用户可能会打开他们的手机的移动设备辅助技术并使用您的应用程序。如果您的应用程序还没有为这项技术做好准备，则可能存在无法使用该技术的风险。</p>
 
-          
-        
       
     </div>
 
@@ -563,347 +557,56 @@
     
 
     
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Aries</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="http://yoursite.com/2019/01/25/Flutter-Semantics-控件/" title="Flutter-Semantics-控件">http://yoursite.com/2019/01/25/Flutter-Semantics-控件/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
 
     <footer class="post-footer">
       
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/25/Flutter-GridView-控件/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Aries">
-      <meta itemprop="description" content="记录成长的过程">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Aries's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/25/Flutter-GridView-控件/" class="post-title-link" itemprop="url">Flutter-GridView-控件</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-01-25 11:03:45 / 修改时间：11:36:52" itemprop="dateCreated datePublished" datetime="2019-01-25T11:03:45+08:00">2019-01-25</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
       
 
       
-        
-          <p>一个可滚动的2D排列的小部件。</p>
-<p>控件网格的主轴方向是它滚动的方向（ <a href="https://docs.flutter.io/flutter/widgets/ScrollView/scrollDirection.html" target="_blank" rel="noopener">scrollDirection</a>）。</p>
-<p>最常用的网格布局是 <a href="https://docs.flutter.io/flutter/widgets/GridView/GridView.count.html" target="_blank" rel="noopener">GridView.count</a>，它创建了一个在横轴上具有固定数量 网格块 的平铺的布局，和  <a href="https://docs.flutter.io/flutter/widgets/GridView/GridView.extent.html" target="_blank" rel="noopener">GridView.extent</a> ，它使用具有最大横轴范围的 网格块 创建布局。自定义  <a href="https://docs.flutter.io/flutter/rendering/SliverGridDelegate-class.html" target="_blank" rel="noopener">SliverGridDelegate</a> 可以生成任意2D排列的子代，包括未对齐或重叠的排列。<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/01/25/Flutter-GridView-控件/" rel="contents">
-                阅读全文 &raquo;
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/25/Flutter-GridView-控件/" rel="next" title="Flutter-GridView-控件">
+                <i class="fa fa-chevron-left"></i> Flutter-GridView-控件
               </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/24/Flutter项目开发小结（一）/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Aries">
-      <meta itemprop="description" content="记录成长的过程">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Aries's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/24/Flutter项目开发小结（一）/" class="post-title-link" itemprop="url">Flutter项目开发小结（一）</a>
-              
             
-          </h1>
-        
+          </div>
 
-        <div class="post-meta">
-          <span class="post-time">
+          <span class="post-nav-divider"></span>
 
+          <div class="post-nav-prev post-nav-item">
             
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-01-24 22:41:24 / 修改时间：23:01:17" itemprop="dateCreated datePublished" datetime="2019-01-24T22:41:24+08:00">2019-01-24</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>使用 Flutter 开发已经一段时间，对于这段时间遇到的问题做一个小结。</p>
-<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>flutter中的默认导航分成两种，一种是命名的路由，一种是构建路由。</p>
-<p>命名路由：缺点是不能传递参数<br>这种路由需要一开始现在创建App的时候定义Route</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -913,177 +616,15 @@
   </article>
 
 
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/11/hello-world/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Aries">
-      <meta itemprop="description" content="记录成长的过程">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Aries's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/11/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-01-11 17:48:10" itemprop="dateCreated datePublished" datetime="2019-01-11T17:48:10+08:00">2019-01-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-01-24 20:23:41" itemprop="dateModified" datetime="2019-01-24T20:23:41+08:00">2019-01-24</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/01/11/hello-world/" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -1104,8 +645,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -1164,6 +714,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简而言之——这是什么？"><span class="nav-number">2.</span> <span class="nav-text">简而言之——这是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何在-Flutter-中使用"><span class="nav-number">3.</span> <span class="nav-text">如何在 Flutter 中使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SemanticsConfiguration"><span class="nav-number">4.</span> <span class="nav-text">SemanticsConfiguration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐式带有语义的Flutter小部件"><span class="nav-number">5.</span> <span class="nav-text">隐式带有语义的Flutter小部件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何定义Semantics"><span class="nav-number">6.</span> <span class="nav-text">如何定义Semantics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单个Semantics"><span class="nav-number">7.</span> <span class="nav-text">单个Semantics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何没有语义"><span class="nav-number">8.</span> <span class="nav-text">如何没有语义?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何将小部件语义重组成单一语义"><span class="nav-number">9.</span> <span class="nav-text">如何将小部件语义重组成单一语义?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何调试语义"><span class="nav-number">10.</span> <span class="nav-text">如何调试语义?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">11.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -1293,6 +860,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
 
   
 
@@ -1302,6 +873,8 @@
 
 
   
+  
+
 
 
 

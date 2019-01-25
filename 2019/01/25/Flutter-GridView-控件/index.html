@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="一个可滚动的2D排列的小部件。 控件网格的主轴方向是它滚动的方向（ scrollDirection）。 最常用的网格布局是 GridView.count，它创建了一个在横轴上具有固定数量 网格块 的平铺的布局，和  GridView.extent ，它使用具有最大横轴范围的 网格块 创建布局。自定义  SliverGridDelegate 可以生成任意2D排列的子代，包括未对齐或重叠的排列。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter-GridView-控件">
+<meta property="og:url" content="http://yoursite.com/2019/01/25/Flutter-GridView-控件/index.html">
+<meta property="og:site_name" content="Aries&#39;s Blog">
+<meta property="og:description" content="一个可滚动的2D排列的小部件。 控件网格的主轴方向是它滚动的方向（ scrollDirection）。 最常用的网格布局是 GridView.count，它创建了一个在横轴上具有固定数量 网格块 的平铺的布局，和  GridView.extent ，它使用具有最大横轴范围的 网格块 创建布局。自定义  SliverGridDelegate 可以生成任意2D排列的子代，包括未对齐或重叠的排列。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-01-25T03:36:52.613Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flutter-GridView-控件">
+<meta name="twitter:description" content="一个可滚动的2D排列的小部件。 控件网格的主轴方向是它滚动的方向（ scrollDirection）。 最常用的网格布局是 GridView.count，它创建了一个在横轴上具有固定数量 网格块 的平铺的布局，和  GridView.extent ，它使用具有最大横轴范围的 网格块 创建布局。自定义  SliverGridDelegate 可以生成任意2D排列的子代，包括未对齐或重叠的排列。">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/25/Flutter-GridView-控件/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Flutter-GridView-控件 | Aries's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aries's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/25/Flutter-GridView-控件/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aries">
+      <meta itemprop="description" content="记录成长的过程">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aries's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Flutter-GridView-控件
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-25 11:03:45 / 修改时间：11:36:52" itemprop="dateCreated datePublished" datetime="2019-01-25T11:03:45+08:00">2019-01-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一个可滚动的2D排列的小部件。</p>
+<p>控件网格的主轴方向是它滚动的方向（ <a href="https://docs.flutter.io/flutter/widgets/ScrollView/scrollDirection.html" target="_blank" rel="noopener">scrollDirection</a>）。</p>
+<p>最常用的网格布局是 <a href="https://docs.flutter.io/flutter/widgets/GridView/GridView.count.html" target="_blank" rel="noopener">GridView.count</a>，它创建了一个在横轴上具有固定数量 网格块 的平铺的布局，和  <a href="https://docs.flutter.io/flutter/widgets/GridView/GridView.extent.html" target="_blank" rel="noopener">GridView.extent</a> ，它使用具有最大横轴范围的 网格块 创建布局。自定义  <a href="https://docs.flutter.io/flutter/rendering/SliverGridDelegate-class.html" target="_blank" rel="noopener">SliverGridDelegate</a> 可以生成任意2D排列的子代，包括未对齐或重叠的排列。<br><a id="more"></a></p>
+<p>要创建具有大量（或无限）个子节点的网格，请将 <a href="https://docs.flutter.io/flutter/widgets/GridView/GridView.builder.html" target="_blank" rel="noopener">GridView.builder</a> 构造函数与<a href="https://docs.flutter.io/flutter/widgets/GridView/gridDelegate.html" target="_blank" rel="noopener">gridDelegate</a> 的 <a href="https://docs.flutter.io/flutter/rendering/SliverGridDelegateWithFixedCrossAxisCount-class.html" target="_blank" rel="noopener">SliverGridDelegateWithFixedCrossAxisCount</a> 或 <a href="https://docs.flutter.io/flutter/rendering/SliverGridDelegateWithMaxCrossAxisExtent-class.html" target="_blank" rel="noopener">SliverGridDelegateWithMaxCrossAxisExtent</a> 一起使用。</p>
+<p>要使用自定义<a href="https://docs.flutter.io/flutter/widgets/SliverChildDelegate-class.html" target="_blank" rel="noopener">SliverChildDelegate</a> ，请使用 <a href="https://docs.flutter.io/flutter/widgets/GridView/GridView.custom.html" target="_blank" rel="noopener">GridView.custom</a>。</p>
+<p>要创建线性数组的子代，请使用 <a href="https://docs.flutter.io/flutter/widgets/ListView-class.html" target="_blank" rel="noopener">ListView</a>。</p>
+<p>若要控制滚动视图的初始滚动偏移，请为控制器 <a href="https://docs.flutter.io/flutter/widgets/ScrollView/controller.html" target="_blank" rel="noopener">controller</a> 提供其<a href="https://docs.flutter.io/flutter/widgets/ScrollController/initialScrollOffset.html" target="_blank" rel="noopener">ScrollController.initialScrollOffset</a> 属性集。</p>
+<h2 id="转换到CustomScrollView"><a href="#转换到CustomScrollView" class="headerlink" title="转换到CustomScrollView"></a>转换到CustomScrollView</h2><p>GridView基本上是一个 <a href="https://docs.flutter.io/flutter/widgets/CustomScrollView-class.html" target="_blank" rel="noopener">CustomScrollView</a> ，其 <a href="https://docs.flutter.io/flutter/widgets/CustomScrollView/slivers.html" target="_blank" rel="noopener">CustomScrollView.slivers</a> 中包含一个<a href="https://docs.flutter.io/flutter/widgets/SliverGrid-class.html" target="_blank" rel="noopener">SliverGrid</a>。</p>
+<p>如果GridView不再足够，例如因为滚动视图既有网格又有列表，或者因为网格要与 <a href="https://docs.flutter.io/flutter/material/SliverAppBar-class.html" target="_blank" rel="noopener">SliverAppBar</a> 等组合在一起，直接将代码从使用 GridView 移植到 CustomScrollView 直接使用。</p>
+<p><a href="https://docs.flutter.io/flutter/widgets/CustomScrollView/slivers.html" target="_blank" rel="noopener">CustomScrollView.slivers</a> 属性只能使用包含  <a href="https://docs.flutter.io/flutter/widgets/SliverGrid-class.html" target="_blank" rel="noopener">SliverGrid</a> 的列表。</p>
+<p>GridView上 的 <a href="https://docs.flutter.io/flutter/widgets/GridView/childrenDelegate.html" target="_blank" rel="noopener">childrenDelegate</a> 属性对应于 <a href="https://docs.flutter.io/flutter/widgets/SliverMultiBoxAdaptorWidget/delegate.html" target="_blank" rel="noopener">SliverGrid.delegate</a> 属性，GridView上 的 <a href="https://docs.flutter.io/flutter/widgets/GridView/gridDelegate.html" target="_blank" rel="noopener">gridDelegate</a> 属性对应于  <a href="https://docs.flutter.io/flutter/widgets/SliverGrid/gridDelegate.html" target="_blank" rel="noopener">SliverGrid.gridDelegate</a> 属性。</p>
+<p>GridView，GridView.count和GridView.extent构造函数的子参数对应于 GridView 中 <a href="https://docs.flutter.io/flutter/widgets/GridView/childrenDelegate.html" target="_blank" rel="noopener">childrenDelegate</a> 是具有相同参数的 <a href="https://docs.flutter.io/flutter/widgets/SliverChildListDelegate-class.html" target="_blank" rel="noopener">SliverChildListDelegate</a>。</p>
+<p>GridView.builder 构造函数的 itemBuilder 和 childCount 参数对应于 <a href="https://docs.flutter.io/flutter/widgets/GridView-class.html" target="_blank" rel="noopener">GridView</a> 中的 <a href="https://docs.flutter.io/flutter/widgets/GridView/childrenDelegate.html" target="_blank" rel="noopener">childrenDelegate</a>，它们是具有匹配参数的  <a href="https://docs.flutter.io/flutter/widgets/SliverChildBuilderDelegate-class.html" target="_blank" rel="noopener">SliverChildBuilderDelegate</a> </p>
+<p>GridView.count 和 GridView.extent 构造函数创建自定义网格委托，并在 SliverGrid上 具有等效命名的构造函数以简化转换：分别为 SliverGrid.count 和 SliverGrid.extent。</p>
+<p>padding 属性对应于在 CustomScrollView.slivers 属性中使用  <a href="https://docs.flutter.io/flutter/widgets/SliverPadding-class.html" target="_blank" rel="noopener">SliverPadding</a> 而不是网格本身，并且让 SliverGrid 成为 SliverPadding 的子级。</p>
+<p>默认情况下，ListView将自动填充列表的可滚动范围，以避免MediaQuery的padding 造成的部分障碍。要避免此行为，请使用<a href="https://docs.flutter.io/flutter/widgets/BoxScrollView/padding.html" target="_blank" rel="noopener">padding</a>属性为0进行覆盖。</p>
+<p>将代码移植到使用CustomScrollView后，可以将其他slivers（例如 <a href="https://docs.flutter.io/flutter/widgets/SliverList-class.html" target="_blank" rel="noopener">SliverList</a> 或 <a href="https://docs.flutter.io/flutter/material/SliverAppBar-class.html" target="_blank" rel="noopener">SliverAppBar</a>）放入<a href="https://docs.flutter.io/flutter/widgets/CustomScrollView/slivers.html" target="_blank" rel="noopener">CustomScrollView.slivers</a> 中。</p>
+<p>以下是使用 CustomScrollView 显示 GridView 等效的代码片段：<br><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">GridView.count(</span><br><span class="line">  primary: <span class="literal">false</span>,</span><br><span class="line">  padding: <span class="keyword">const</span> EdgeInsets.all(<span class="number">20.0</span>),</span><br><span class="line">  crossAxisSpacing: <span class="number">10.0</span>,</span><br><span class="line">  crossAxisCount: <span class="number">2</span>,</span><br><span class="line">  children: &lt;Widget&gt;[</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">Text</span>(<span class="comment">'He\'d have you all unravel at the'),</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">Text</span>(<span class="comment">'Heed not the rabble'),</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">Text</span>(<span class="comment">'Sound of screams but the'),</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">Text</span>(<span class="comment">'Who scream'),</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">Text</span>(<span class="comment">'Revolution is coming...'),</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">Text</span>(<span class="comment">'Revolution, they...'),</span></span><br><span class="line">  ],</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">CustomScrollView(</span><br><span class="line">  primary: <span class="literal">false</span>,</span><br><span class="line">  slivers: &lt;Widget&gt;[</span><br><span class="line">    SliverPadding(</span><br><span class="line">      padding: <span class="keyword">const</span> EdgeInsets.all(<span class="number">20.0</span>),</span><br><span class="line">      sliver: SliverGrid.count(</span><br><span class="line">        crossAxisSpacing: <span class="number">10.0</span>,</span><br><span class="line">        crossAxisCount: <span class="number">2</span>,</span><br><span class="line">        children: &lt;Widget&gt;[</span><br><span class="line">          <span class="keyword">const</span> <span class="keyword">Text</span>(<span class="comment">'He\'d have you all unravel at the'),</span></span><br><span class="line">          <span class="keyword">const</span> <span class="keyword">Text</span>(<span class="comment">'Heed not the rabble'),</span></span><br><span class="line">          <span class="keyword">const</span> <span class="keyword">Text</span>(<span class="comment">'Sound of screams but the'),</span></span><br><span class="line">          <span class="keyword">const</span> <span class="keyword">Text</span>(<span class="comment">'Who scream'),</span></span><br><span class="line">          <span class="keyword">const</span> <span class="keyword">Text</span>(<span class="comment">'Revolution is coming...'),</span></span><br><span class="line">          <span class="keyword">const</span> <span class="keyword">Text</span>(<span class="comment">'Revolution, they...'),</span></span><br><span class="line">        ],</span><br><span class="line">      ),</span><br><span class="line">    ),</span><br><span class="line">  ],</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>也可以看看：</p>
+<ul>
+<li><a href="https://docs.flutter.io/flutter/widgets/SingleChildScrollView-class.html" target="_blank" rel="noopener">SingleChildScrollView</a>，它是一个具有单个子项的可滚动窗口小部件。</li>
+<li><a href="https://docs.flutter.io/flutter/widgets/ListView-class.html" target="_blank" rel="noopener">ListView</a>，它是可滚动的，线性的小部件列表。 </li>
+<li><a href="https://docs.flutter.io/flutter/widgets/PageView-class.html" target="_blank" rel="noopener">PageView</a>，这是一个滚动列表，页面视图的每个子项大小都被强制与视口大小相同。 </li>
+<li><a href="https://docs.flutter.io/flutter/widgets/CustomScrollView-class.html" target="_blank" rel="noopener">CustomScrollView</a>，这是一个可滚动的小部件，使Slivers用创建自定义滚动效果。 </li>
+<li><a href="https://docs.flutter.io/flutter/rendering/SliverGridDelegateWithFixedCrossAxisCount-class.html" target="_blank" rel="noopener">SliverGridDelegateWithFixedCrossAxisCount</a>，它创建一个在横轴上具有固定数量的 网格块 的布局。 </li>
+<li><a href="https://docs.flutter.io/flutter/rendering/SliverGridDelegateWithMaxCrossAxisExtent-class.html" target="_blank" rel="noopener">SliverGridDelegateWithMaxCrossAxisExtent</a>，用于创建具有最大横轴范围的 网格块 的布局。 </li>
+<li><a href="https://docs.flutter.io/flutter/widgets/ScrollNotification-class.html" target="_blank" rel="noopener">ScrollNotification</a> 和 <a href="https://docs.flutter.io/flutter/widgets/NotificationListener-class.html" target="_blank" rel="noopener">NotificationListener</a>，可用于在不使用  <a href="https://docs.flutter.io/flutter/widgets/ScrollController-class.html" target="_blank" rel="noopener">ScrollController</a> 的情况下查看滚动位置。</li>
+</ul>
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p><code>使用自定义SliverGridDelegate创建可滚动的2D小部件数组</code><br><a href="https://docs.flutter.io/flutter/widgets/GridView/GridView.html" target="_blank" rel="noopener"><strong>GridView</strong></a>({<a href="https://docs.flutter.io/flutter/foundation/Key-class.html" target="_blank" rel="noopener">Key</a> key, <a href="https://docs.flutter.io/flutter/painting/Axis-class.html" target="_blank" rel="noopener">Axis</a> scrollDirection: Axis.vertical, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> reverse: false, <a href="https://docs.flutter.io/flutter/widgets/ScrollController-class.html" target="_blank" rel="noopener">ScrollController</a> controller, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> primary, <a href="https://docs.flutter.io/flutter/widgets/ScrollPhysics-class.html" target="_blank" rel="noopener">ScrollPhysics</a> physics, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> shrinkWrap: false, <a href="https://docs.flutter.io/flutter/painting/EdgeInsetsGeometry-class.html" target="_blank" rel="noopener">EdgeInsetsGeometry</a> padding, @required <a href="https://docs.flutter.io/flutter/rendering/SliverGridDelegate-class.html" target="_blank" rel="noopener">SliverGridDelegate</a> gridDelegate, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> addAutomaticKeepAlives: true, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> addRepaintBoundaries: true, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> addSemanticIndexes: true, <a href="https://docs.flutter.io/flutter/dart-core/double-class.html" target="_blank" rel="noopener">double</a> cacheExtent, <a href="https://docs.flutter.io/flutter/dart-core/List-class.html" target="_blank" rel="noopener">List</a>&lt;<a href="https://docs.flutter.io/flutter/widgets/Widget-class.html" target="_blank" rel="noopener">Widget</a>&gt; children: const <widget>[]</widget>, <a href="https://docs.flutter.io/flutter/dart-core/int-class.html" target="_blank" rel="noopener">int</a> semanticChildCount })</p>
+<p><code>创建 按需创建的可滚动的2D小部件数组</code><br><a href="https://docs.flutter.io/flutter/widgets/GridView/GridView.builder.html" target="_blank" rel="noopener"><strong>GridView.builder</strong></a>({<a href="https://docs.flutter.io/flutter/foundation/Key-class.html" target="_blank" rel="noopener">Key</a> key, <a href="https://docs.flutter.io/flutter/painting/Axis-class.html" target="_blank" rel="noopener">Axis</a> scrollDirection: Axis.vertical, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> reverse: false, <a href="https://docs.flutter.io/flutter/widgets/ScrollController-class.html" target="_blank" rel="noopener">ScrollController</a> controller, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> primary, <a href="https://docs.flutter.io/flutter/widgets/ScrollPhysics-class.html" target="_blank" rel="noopener">ScrollPhysics</a> physics, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> shrinkWrap: false, <a href="https://docs.flutter.io/flutter/painting/EdgeInsetsGeometry-class.html" target="_blank" rel="noopener">EdgeInsetsGeometry</a> padding, @required <a href="https://docs.flutter.io/flutter/rendering/SliverGridDelegate-class.html" target="_blank" rel="noopener">SliverGridDelegate</a> gridDelegate, @required <a href="https://docs.flutter.io/flutter/widgets/IndexedWidgetBuilder.html" target="_blank" rel="noopener">IndexedWidgetBuilder</a> itemBuilder, <a href="https://docs.flutter.io/flutter/dart-core/int-class.html" target="_blank" rel="noopener">int</a> itemCount, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> addAutomaticKeepAlives: true, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> addRepaintBoundaries: true, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> addSemanticIndexes: true, <a href="https://docs.flutter.io/flutter/dart-core/double-class.html" target="_blank" rel="noopener">double</a> cacheExtent, <a href="https://docs.flutter.io/flutter/dart-core/int-class.html" target="_blank" rel="noopener">int</a> semanticChildCount })</p>
+<p><code>创建一个可滚动的2D小部件数组，在横轴上具有固定数量的网格块</code><br><a href="https://docs.flutter.io/flutter/widgets/GridView/GridView.count.html" target="_blank" rel="noopener"><strong>GridView.count</strong></a>({<a href="https://docs.flutter.io/flutter/foundation/Key-class.html" target="_blank" rel="noopener">Key</a> key, <a href="https://docs.flutter.io/flutter/painting/Axis-class.html" target="_blank" rel="noopener">Axis</a> scrollDirection: Axis.vertical, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> reverse: false, <a href="https://docs.flutter.io/flutter/widgets/ScrollController-class.html" target="_blank" rel="noopener">ScrollController</a> controller, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> primary, <a href="https://docs.flutter.io/flutter/widgets/ScrollPhysics-class.html" target="_blank" rel="noopener">ScrollPhysics</a> physics, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> shrinkWrap: false, <a href="https://docs.flutter.io/flutter/painting/EdgeInsetsGeometry-class.html" target="_blank" rel="noopener">EdgeInsetsGeometry</a> padding, @required <a href="https://docs.flutter.io/flutter/dart-core/int-class.html" target="_blank" rel="noopener">int</a> crossAxisCount, <a href="https://docs.flutter.io/flutter/dart-core/double-class.html" target="_blank" rel="noopener">double</a> mainAxisSpacing: 0.0, <a href="https://docs.flutter.io/flutter/dart-core/double-class.html" target="_blank" rel="noopener">double</a> crossAxisSpacing: 0.0, <a href="https://docs.flutter.io/flutter/dart-core/double-class.html" target="_blank" rel="noopener">double</a> childAspectRatio: 1.0, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> addAutomaticKeepAlives: true, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> addRepaintBoundaries: true, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> addSemanticIndexes: true, <a href="https://docs.flutter.io/flutter/dart-core/double-class.html" target="_blank" rel="noopener">double</a> cacheExtent, <a href="https://docs.flutter.io/flutter/dart-core/List-class.html" target="_blank" rel="noopener">List</a>&lt;<a href="https://docs.flutter.io/flutter/widgets/Widget-class.html" target="_blank" rel="noopener">Widget</a>&gt; children: const <widget>[]</widget>, <a href="https://docs.flutter.io/flutter/dart-core/int-class.html" target="_blank" rel="noopener">int</a> semanticChildCount })</p>
+<p>使用自定义SliverGridDelegate和自定义SliverChildDelegate创建可滚动的2D小部件数组<br><a href="https://docs.flutter.io/flutter/widgets/GridView/GridView.custom.html" target="_blank" rel="noopener"><strong>GridView.custom</strong></a>({<a href="https://docs.flutter.io/flutter/foundation/Key-class.html" target="_blank" rel="noopener">Key</a> key, <a href="https://docs.flutter.io/flutter/painting/Axis-class.html" target="_blank" rel="noopener">Axis</a> scrollDirection: Axis.vertical, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> reverse: false, <a href="https://docs.flutter.io/flutter/widgets/ScrollController-class.html" target="_blank" rel="noopener">ScrollController</a> controller, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> primary, <a href="https://docs.flutter.io/flutter/widgets/ScrollPhysics-class.html" target="_blank" rel="noopener">ScrollPhysics</a> physics, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> shrinkWrap: false, <a href="https://docs.flutter.io/flutter/painting/EdgeInsetsGeometry-class.html" target="_blank" rel="noopener">EdgeInsetsGeometry</a> padding, @required <a href="https://docs.flutter.io/flutter/rendering/SliverGridDelegate-class.html" target="_blank" rel="noopener">SliverGridDelegate</a> gridDelegate, @required <a href="https://docs.flutter.io/flutter/widgets/SliverChildDelegate-class.html" target="_blank" rel="noopener">SliverChildDelegate</a> childrenDelegate, <a href="https://docs.flutter.io/flutter/dart-core/double-class.html" target="_blank" rel="noopener">double</a> cacheExtent, <a href="https://docs.flutter.io/flutter/dart-core/int-class.html" target="_blank" rel="noopener">int</a> semanticChildCount })</p>
+<p>使用每个都具有最大横轴范围的 网格块 创建可滚动的2D小部件数组。<br><a href="https://docs.flutter.io/flutter/widgets/GridView/GridView.extent.html" target="_blank" rel="noopener"><strong>GridView.extent</strong></a>({<a href="https://docs.flutter.io/flutter/foundation/Key-class.html" target="_blank" rel="noopener">Key</a> key, <a href="https://docs.flutter.io/flutter/painting/Axis-class.html" target="_blank" rel="noopener">Axis</a> scrollDirection: Axis.vertical, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> reverse: false, <a href="https://docs.flutter.io/flutter/widgets/ScrollController-class.html" target="_blank" rel="noopener">ScrollController</a> controller, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> primary, <a href="https://docs.flutter.io/flutter/widgets/ScrollPhysics-class.html" target="_blank" rel="noopener">ScrollPhysics</a> physics, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> shrinkWrap: false, <a href="https://docs.flutter.io/flutter/painting/EdgeInsetsGeometry-class.html" target="_blank" rel="noopener">EdgeInsetsGeometry</a> padding, @required <a href="https://docs.flutter.io/flutter/dart-core/double-class.html" target="_blank" rel="noopener">double</a> maxCrossAxisExtent, <a href="https://docs.flutter.io/flutter/dart-core/double-class.html" target="_blank" rel="noopener">double</a> mainAxisSpacing: 0.0, <a href="https://docs.flutter.io/flutter/dart-core/double-class.html" target="_blank" rel="noopener">double</a> crossAxisSpacing: 0.0, <a href="https://docs.flutter.io/flutter/dart-core/double-class.html" target="_blank" rel="noopener">double</a> childAspectRatio: 1.0, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> addAutomaticKeepAlives: true, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> addRepaintBoundaries: true, <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a> addSemanticIndexes: true, <a href="https://docs.flutter.io/flutter/dart-core/List-class.html" target="_blank" rel="noopener">List</a>&lt;<a href="https://docs.flutter.io/flutter/widgets/Widget-class.html" target="_blank" rel="noopener">Widget</a>&gt; children: const <widget>[]</widget>, <a href="https://docs.flutter.io/flutter/dart-core/int-class.html" target="_blank" rel="noopener">int</a> semanticChildCount })</p>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><table>
+<thead>
+<tr>
+<th>名称 类型</th>
+<th>描述 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/GridView/childrenDelegate.html" target="_blank" rel="noopener"><strong>childrenDelegate</strong></a> → <a href="https://docs.flutter.io/flutter/widgets/SliverChildDelegate-class.html" target="_blank" rel="noopener">SliverChildDelegate</a></td>
+<td>为GridView提供子代的委托</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/GridView/gridDelegate.html" target="_blank" rel="noopener"><strong>gridDelegate</strong></a> → <a href="https://docs.flutter.io/flutter/rendering/SliverGridDelegate-class.html" target="_blank" rel="noopener">SliverGridDelegate</a></td>
+<td>一个控制 GridView 中子项布局的委托。</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/ScrollView/cacheExtent.html" target="_blank" rel="noopener">cacheExtent</a> → <a href="https://docs.flutter.io/flutter/dart-core/double-class.html" target="_blank" rel="noopener">double</a></td>
+<td>视口在可见区域之前和之后有一个区域，用于缓存在用户滚动时即将变为可见的项目</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/ScrollView/controller.html" target="_blank" rel="noopener">controller</a> → <a href="https://docs.flutter.io/flutter/widgets/ScrollController-class.html" target="_blank" rel="noopener">ScrollController</a></td>
+<td>一个对象，可用于控制滚动滚动视图的位置</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/dart-core/Object/hashCode.html" target="_blank" rel="noopener">hashCode</a> → <a href="https://docs.flutter.io/flutter/dart-core/int-class.html" target="_blank" rel="noopener">int</a></td>
+<td>此对象的哈希码</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/Widget/key.html" target="_blank" rel="noopener">key</a> → <a href="https://docs.flutter.io/flutter/foundation/Key-class.html" target="_blank" rel="noopener">Key</a></td>
+<td>控制一个小部件如何替换树中的另一个小部件</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/BoxScrollView/padding.html" target="_blank" rel="noopener">padding</a> → <a href="https://docs.flutter.io/flutter/painting/EdgeInsetsGeometry-class.html" target="_blank" rel="noopener">EdgeInsetsGeometry</a></td>
+<td>插入子代的内边距</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/ScrollView/physics.html" target="_blank" rel="noopener">physics</a> → <a href="https://docs.flutter.io/flutter/widgets/ScrollPhysics-class.html" target="_blank" rel="noopener">ScrollPhysics</a></td>
+<td>滚动视图应如何响应用户输入，物理滚动方式</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/ScrollView/primary.html" target="_blank" rel="noopener">primary</a> → <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a></td>
+<td>这是否是与父 <a href="https://docs.flutter.io/flutter/widgets/PrimaryScrollController-class.html" target="_blank" rel="noopener">PrimaryScrollController</a> 关联的主滚动视图。</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/ScrollView/reverse.html" target="_blank" rel="noopener">reverse</a> → <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a></td>
+<td>滚动视图是否在读取方向上滚动</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/dart-core/Object/runtimeType.html" target="_blank" rel="noopener">runtimeType</a> → <a href="https://docs.flutter.io/flutter/dart-core/Type-class.html" target="_blank" rel="noopener">Type</a></td>
+<td>表示对象的运行时类型</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/ScrollView/scrollDirection.html" target="_blank" rel="noopener">scrollDirection</a> → <a href="https://docs.flutter.io/flutter/painting/Axis-class.html" target="_blank" rel="noopener">Axis</a></td>
+<td>滚动视图的滚动轴</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/ScrollView/semanticChildCount.html" target="_blank" rel="noopener">semanticChildCount</a> → <a href="https://docs.flutter.io/flutter/dart-core/int-class.html" target="_blank" rel="noopener">int</a></td>
+<td>将提供语义信息的子代数量</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/ScrollView/shrinkWrap.html" target="_blank" rel="noopener">shrinkWrap</a> → <a href="https://docs.flutter.io/flutter/dart-core/bool-class.html" target="_blank" rel="noopener">bool</a></td>
+<td>是否应该由正在查看的内容确定scrollDirection中滚动视图的范围。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><table>
+<thead>
+<tr>
+<th>名称 类型</th>
+<th>描述 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/GridView/buildChildLayout.html" target="_blank" rel="noopener">buildChildLayout</a>(<a href="https://docs.flutter.io/flutter/widgets/BuildContext-class.html" target="_blank" rel="noopener">BuildContext</a> context) → <a href="https://docs.flutter.io/flutter/widgets/Widget-class.html" target="_blank" rel="noopener">Widget</a></td>
+<td>子类应重写此方法以构建布局模型</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/ScrollView/build.html" target="_blank" rel="noopener">build</a>(<a href="https://docs.flutter.io/flutter/widgets/BuildContext-class.html" target="_blank" rel="noopener">BuildContext</a> context) → <a href="https://docs.flutter.io/flutter/widgets/Widget-class.html" target="_blank" rel="noopener">Widget</a></td>
+<td>描述此窗口小部件表示的用户界面部分</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/BoxScrollView/buildSlivers.html" target="_blank" rel="noopener">buildSlivers</a>(<a href="https://docs.flutter.io/flutter/widgets/BuildContext-class.html" target="_blank" rel="noopener">BuildContext</a> context) → <a href="https://docs.flutter.io/flutter/dart-core/List-class.html" target="_blank" rel="noopener">List</a>&lt;<a href="https://docs.flutter.io/flutter/widgets/Widget-class.html" target="_blank" rel="noopener">Widget</a>&gt;</td>
+<td>构建要放置在视口内的窗口小部件列表</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/ScrollView/buildViewport.html" target="_blank" rel="noopener">buildViewport</a>(<a href="https://docs.flutter.io/flutter/widgets/BuildContext-class.html" target="_blank" rel="noopener">BuildContext</a> context, <a href="https://docs.flutter.io/flutter/rendering/ViewportOffset-class.html" target="_blank" rel="noopener">ViewportOffset</a> offset, <a href="https://docs.flutter.io/flutter/painting/AxisDirection-class.html" target="_blank" rel="noopener">AxisDirection</a> axisDirection, <a href="https://docs.flutter.io/flutter/dart-core/List-class.html" target="_blank" rel="noopener">List</a>&lt;<a href="https://docs.flutter.io/flutter/widgets/Widget-class.html" target="_blank" rel="noopener">Widget</a>&gt; slivers) → <a href="https://docs.flutter.io/flutter/widgets/Widget-class.html" target="_blank" rel="noopener">Widget</a></td>
+<td>构建视口</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/StatelessWidget/createElement.html" target="_blank" rel="noopener">createElement</a>() → <a href="https://docs.flutter.io/flutter/widgets/StatelessElement-class.html" target="_blank" rel="noopener">StatelessElement</a></td>
+<td>创建StatelessElement以管理此窗口小部件在树中的位置。</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/foundation/DiagnosticableTree/debugDescribeChildren.html" target="_blank" rel="noopener">debugDescribeChildren</a>() → <a href="https://docs.flutter.io/flutter/dart-core/List-class.html" target="_blank" rel="noopener">List</a>&lt;<a href="https://docs.flutter.io/flutter/foundation/DiagnosticsNode-class.html" target="_blank" rel="noopener">DiagnosticsNode</a>&gt;</td>
+<td>返回描述此节点的子节点的DiagnosticsNode对象列表。</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/BoxScrollView/debugFillProperties.html" target="_blank" rel="noopener">debugFillProperties</a>(<a href="https://docs.flutter.io/flutter/foundation/DiagnosticPropertiesBuilder-class.html" target="_blank" rel="noopener">DiagnosticPropertiesBuilder</a> properties) → void</td>
+<td>添加与节点关联的其他属性</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/ScrollView/getDirection.html" target="_blank" rel="noopener">getDirection</a>(<a href="https://docs.flutter.io/flutter/widgets/BuildContext-class.html" target="_blank" rel="noopener">BuildContext</a> context) → <a href="https://docs.flutter.io/flutter/painting/AxisDirection-class.html" target="_blank" rel="noopener">AxisDirection</a></td>
+<td>返回滚动视图滚动的AxisDirection</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/dart-core/Object/noSuchMethod.html" target="_blank" rel="noopener">noSuchMethod</a>(<a href="https://docs.flutter.io/flutter/dart-core/Invocation-class.html" target="_blank" rel="noopener">Invocation</a> invocation) → dynamic</td>
+<td>访问不存在的方法或属性时调用</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/foundation/DiagnosticableTree/toDiagnosticsNode.html" target="_blank" rel="noopener">toDiagnosticsNode</a>({<a href="https://docs.flutter.io/flutter/dart-core/String-class.html" target="_blank" rel="noopener">String</a> name, <a href="https://docs.flutter.io/flutter/foundation/DiagnosticsTreeStyle-class.html" target="_blank" rel="noopener">DiagnosticsTreeStyle</a> style }) → <a href="https://docs.flutter.io/flutter/foundation/DiagnosticsNode-class.html" target="_blank" rel="noopener">DiagnosticsNode</a></td>
+<td>返回调试工具和toStringDeep使用的对象的调试表示形式</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/foundation/Diagnosticable/toString.html" target="_blank" rel="noopener">toString</a>({<a href="https://docs.flutter.io/flutter/foundation/DiagnosticLevel-class.html" target="_blank" rel="noopener">DiagnosticLevel</a> minLevel: DiagnosticLevel.debug }) → <a href="https://docs.flutter.io/flutter/dart-core/String-class.html" target="_blank" rel="noopener">String</a></td>
+<td>返回此对象的字符串表示形式</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/foundation/DiagnosticableTree/toStringDeep.html" target="_blank" rel="noopener">toStringDeep</a>({<a href="https://docs.flutter.io/flutter/dart-core/String-class.html" target="_blank" rel="noopener">String</a> prefixLineOne: ‘’, <a href="https://docs.flutter.io/flutter/dart-core/String-class.html" target="_blank" rel="noopener">String</a> prefixOtherLines, <a href="https://docs.flutter.io/flutter/foundation/DiagnosticLevel-class.html" target="_blank" rel="noopener">DiagnosticLevel</a> minLevel: DiagnosticLevel.debug }) → <a href="https://docs.flutter.io/flutter/dart-core/String-class.html" target="_blank" rel="noopener">String</a></td>
+<td>返回此节点及其后代的字符串表示形式。</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/foundation/DiagnosticableTree/toStringShallow.html" target="_blank" rel="noopener">toStringShallow</a>({<a href="https://docs.flutter.io/flutter/dart-core/String-class.html" target="_blank" rel="noopener">String</a> joiner: ‘, ‘, <a href="https://docs.flutter.io/flutter/foundation/DiagnosticLevel-class.html" target="_blank" rel="noopener">DiagnosticLevel</a> minLevel: DiagnosticLevel.debug }) → <a href="https://docs.flutter.io/flutter/dart-core/String-class.html" target="_blank" rel="noopener">String</a></td>
+<td>返回对象的单行详细描述</td>
+</tr>
+<tr>
+<td><a href="https://docs.flutter.io/flutter/widgets/Widget/toStringShort.html" target="_blank" rel="noopener">toStringShort</a>() → <a href="https://docs.flutter.io/flutter/dart-core/String-class.html" target="_blank" rel="noopener">String</a></td>
+<td>这个小部件的简短文字描述</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Aries</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="http://yoursite.com/2019/01/25/Flutter-GridView-控件/" title="Flutter-GridView-控件">http://yoursite.com/2019/01/25/Flutter-GridView-控件/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/24/Flutter项目开发小结（一）/" rel="next" title="Flutter项目开发小结（一）">
+                <i class="fa fa-chevron-left"></i> Flutter项目开发小结（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/25/Flutter-Semantics-控件/" rel="prev" title="Flutter-Semantics-控件">
+                Flutter-Semantics-控件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Aries">
+            
+              <p class="site-author-name" itemprop="name">Aries</p>
+              <p class="site-description motion-element" itemprop="description">记录成长的过程</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#转换到CustomScrollView"><span class="nav-number">1.</span> <span class="nav-text">转换到CustomScrollView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造函数"><span class="nav-number">2.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性"><span class="nav-number">3.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-number">4.</span> <span class="nav-text">方法</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aries</span>
+
+  
+  <div class="powered-by">
+  &nbsp;
+    <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+      本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+  </div>
+  
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
