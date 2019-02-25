@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="如何阅读指南 DO 应始终遵循的准则 DON&amp;#39;T 不应该这么使用的准则 PREFER 应该遵循的准则，但是在某些情况下，可以根据个人理解忽略，不遵循 DON&amp;#39;T 不应该这么使用的准则 AVOID 不应该遵循的准则，但是在某些情况下，可以根据个人理解忽略，不遵循 CONSIDER 可遵循或者不遵循的规则，取决于个人偏好  注释DO 格式化注释，例如句子将第一个字母大写，除非它是区分大">
+<meta name="keywords" content="dart">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高效编写Dart--文档指南">
+<meta property="og:url" content="https://ranna520.github.io/2019/02/25/高效编写Dart-文档指南/index.html">
+<meta property="og:site_name" content="Aries&#39;s Blog">
+<meta property="og:description" content="如何阅读指南 DO 应始终遵循的准则 DON&amp;#39;T 不应该这么使用的准则 PREFER 应该遵循的准则，但是在某些情况下，可以根据个人理解忽略，不遵循 DON&amp;#39;T 不应该这么使用的准则 AVOID 不应该遵循的准则，但是在某些情况下，可以根据个人理解忽略，不遵循 CONSIDER 可遵循或者不遵循的规则，取决于个人偏好  注释DO 格式化注释，例如句子将第一个字母大写，除非它是区分大">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-25T11:36:55.277Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高效编写Dart--文档指南">
+<meta name="twitter:description" content="如何阅读指南 DO 应始终遵循的准则 DON&amp;#39;T 不应该这么使用的准则 PREFER 应该遵循的准则，但是在某些情况下，可以根据个人理解忽略，不遵循 DON&amp;#39;T 不应该这么使用的准则 AVOID 不应该遵循的准则，但是在某些情况下，可以根据个人理解忽略，不遵循 CONSIDER 可遵循或者不遵循的规则，取决于个人偏好  注释DO 格式化注释，例如句子将第一个字母大写，除非它是区分大">
+
+
+
+
+
+
+  <link rel="canonical" href="https://ranna520.github.io/2019/02/25/高效编写Dart-文档指南/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>高效编写Dart--文档指南 | Aries's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aries's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ranna520.github.io/2019/02/25/高效编写Dart-文档指南/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aries">
+      <meta itemprop="description" content="记录成长的过程">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aries's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">高效编写Dart--文档指南
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-25 19:32:47 / 修改时间：19:36:55" itemprop="dateCreated datePublished" datetime="2019-02-25T19:32:47+08:00">2019-02-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="如何阅读指南"><a href="#如何阅读指南" class="headerlink" title="如何阅读指南"></a>如何阅读指南</h2><ul>
+<li><code>DO</code> 应始终遵循的准则</li>
+<li><code>DON&#39;T</code> 不应该这么使用的准则</li>
+<li><code>PREFER</code> 应该遵循的准则，但是在某些情况下，可以根据个人理解忽略，不遵循</li>
+<li><code>DON&#39;T</code> 不应该这么使用的准则</li>
+<li><code>AVOID</code> 不应该遵循的准则，但是在某些情况下，可以根据个人理解忽略，不遵循</li>
+<li><code>CONSIDER</code> 可遵循或者不遵循的规则，取决于个人偏好</li>
+</ul>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><h3 id="DO-格式化注释，例如句子"><a href="#DO-格式化注释，例如句子" class="headerlink" title="DO 格式化注释，例如句子"></a>DO 格式化注释，例如句子</h3><p>将第一个字母大写，除非它是区分大小写的标识符。用句号结束它（或者可能是“！”或“？”）。所有注释都是如此：文档注释，内联注释，甚至是TODO，即使它是一个句子片段。<br><a id="more"></a><br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Not if there is nothing before it.</span></span><br><span class="line"><span class="keyword">if</span> (_chunks.isEmpty) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="DON’T-将注释写在文档中"><a href="#DON’T-将注释写在文档中" class="headerlink" title="DON’T 将注释写在文档中"></a>DON’T 将注释写在文档中</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line">greet(name) &#123;</span><br><span class="line">  <span class="comment">// Assume we have a valid name.</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">'Hi, <span class="subst">$name</span>!'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line">greet(name) &#123;</span><br><span class="line">  <span class="comment">/* Assume we have a valid name. */</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">'Hi, <span class="subst">$name</span>!'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>您可以使用块注释<code>（/* ... */）</code>暂时注释掉一段代码，但所有其他注释都应该使用<code>//</code></p>
+<h2 id="Doc-注释"><a href="#Doc-注释" class="headerlink" title="Doc 注释"></a>Doc 注释</h2><p>Doc 注释的内容会被解析生成doc提示文档块，类似代码的信息提示块</p>
+<h3 id="DO-使用-表示doc注释记录成员和类型"><a href="#DO-使用-表示doc注释记录成员和类型" class="headerlink" title="DO 使用 /// 表示doc注释记录成员和类型"></a>DO 使用 /// 表示doc注释记录成员和类型</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/slash_for_doc_comments.html" target="_blank" rel="noopener">slash_for_doc_comments</a><br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// The number of characters in this chunk when unsplit. 未拆分时此块中的字符数</span></span><br><span class="line"><span class="built_in">int</span> <span class="keyword">get</span> length =&gt; ...</span><br></pre></td></tr></table></figure></p>
+<p>如果在文档注释中使用了项目符号列表，使用<code>*</code>标记列表项。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// Parses a set of option strings. For each option:</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// * If it is `null`, then it is ignored.</span></span><br><span class="line"><span class="comment">/// * If it is a string, then [validate] is called on it.</span></span><br><span class="line"><span class="comment">/// * If it is any other type, it is *not* validated.</span></span><br><span class="line"><span class="keyword">void</span> parse(<span class="built_in">List</span> options) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="PREFER-为公共API编写doc注释"><a href="#PREFER-为公共API编写doc注释" class="headerlink" title="PREFER 为公共API编写doc注释"></a>PREFER 为公共API编写doc注释</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/package_api_docs.html" target="_blank" rel="noopener">package_api_docs</a>,  <a href="https://dart-lang.github.io/linter/lints/public_member_api_docs.html" target="_blank" rel="noopener">public_member_api_docs</a><br>您不必记录每个库，顶级变量，类型和成员进行注释，但您应记录其中的大多数。</p>
+<h3 id="CONSIDER-编写库级文档评论"><a href="#CONSIDER-编写库级文档评论" class="headerlink" title="CONSIDER 编写库级文档评论"></a>CONSIDER 编写库级文档评论</h3><p>在library指令之前为文档编写doc 注释，可以向读者介绍其中提供的主要概念和功能。考虑包括：</p>
+<ul>
+<li>关于库用途的单句摘要。</li>
+<li>整个库使用的术语解释。</li>
+<li>一些使用API的完整代码示例。</li>
+<li>指向最重要或最常用的类和函数的链接</li>
+<li>指向库所关心的域上的外部引用的链接</li>
+</ul>
+<h3 id="CONSIDER-为私有API编写doc注释"><a href="#CONSIDER-为私有API编写doc注释" class="headerlink" title="CONSIDER 为私有API编写doc注释"></a>CONSIDER 为私有API编写doc注释</h3><p>Doc评论不仅适用于库的公共API的外部使用者，它们还有助于理解从库的其他部分调用的私有成员。</p>
+<h3 id="DO-用单句摘要开始文档评论"><a href="#DO-用单句摘要开始文档评论" class="headerlink" title="DO 用单句摘要开始文档评论"></a>DO 用单句摘要开始文档评论</h3><p>使用以句号结尾的<code>简明的注释</code>开始编写文档注释，为读者提供足够的上下文来定位自己，并决定是否应该继续阅读或寻找解决问题的方法<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="comment">/// 从文件系统中删除[path]中的文件</span></span><br><span class="line"><span class="keyword">void</span> delete(<span class="built_in">String</span> path) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="comment">/// 根据文件系统的状态和用户的权限，</span></span><br><span class="line"><span class="comment">/// 可能会或可能不会执行某些操作。如果</span></span><br><span class="line"><span class="comment">/// [path]中没有文件或无法访问该文件，则此函数将分别抛出[IOError] </span></span><br><span class="line"><span class="comment">/// 或[PermissionError]。否则，这将删除该文件。</span></span><br><span class="line"><span class="keyword">void</span> delete(<span class="built_in">String</span> path) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="DO-将文档评论的第一句作为一个独立的段落"><a href="#DO-将文档评论的第一句作为一个独立的段落" class="headerlink" title="DO 将文档评论的第一句作为一个独立的段落"></a>DO 将文档评论的第一句作为一个独立的段落</h3><p>在第一句之后添加一个空行，将其拆分为独立的段落。如果多于一句解释是有用的，请将其余部分放在后面的段落中。这有助于您编写一个简短的第一句话来总结文档。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Deletes the file at [path].</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// Throws an [IOError] if the file could not be found. Throws a</span></span><br><span class="line"><span class="comment">/// [PermissionError] if the file is present but could not be deleted.</span></span><br><span class="line"><span class="keyword">void</span> delete(<span class="built_in">String</span> path) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/// Deletes the file at [path]. Throws an [IOError] if the file could not</span></span><br><span class="line"><span class="comment">/// be found. Throws a [PermissionError] if the file is present but could</span></span><br><span class="line"><span class="comment">/// not be deleted.</span></span><br><span class="line"><span class="keyword">void</span> delete(<span class="built_in">String</span> path) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="AVOID-与周围环境的冗余"><a href="#AVOID-与周围环境的冗余" class="headerlink" title="AVOID 与周围环境的冗余"></a>AVOID 与周围环境的冗余</h3><p>类的doc注释的读者可以清楚地看到类的名称，它实现的接口等。当读取成员的注释文档时，签名和封闭的类是显而易见的。这些都不需要在文档评论中拼写出来，只专注于解释读者不知道的内容。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RadioButtonWidget</span> <span class="keyword">extends</span> <span class="title">Widget</span> </span>&#123;</span><br><span class="line">  <span class="comment">/// Sets the tooltip to [lines], which should have been word wrapped using</span></span><br><span class="line">  <span class="comment">/// the current font.</span></span><br><span class="line">  <span class="keyword">void</span> tooltip(<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; lines) &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RadioButtonWidget</span> <span class="keyword">extends</span> <span class="title">Widget</span> </span>&#123;</span><br><span class="line">  <span class="comment">/// Sets the tooltip for this radio button widget to the list of strings in</span></span><br><span class="line">  <span class="comment">/// [lines].</span></span><br><span class="line">  <span class="keyword">void</span> tooltip(<span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; lines) &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="PREFER-启动函数或方法注释与第三人称动词"><a href="#PREFER-启动函数或方法注释与第三人称动词" class="headerlink" title="PREFER 启动函数或方法注释与第三人称动词"></a>PREFER 启动函数或方法注释与第三人称动词</h3><p>文档注释应该关注代码的作用<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// Returns `true` if every element satisfies the [predicate].如果每个元素都满足[predicate]，则返回“true”</span></span><br><span class="line"><span class="built_in">bool</span> all(<span class="built_in">bool</span> predicate(T element)) =&gt; ...</span><br><span class="line"></span><br><span class="line"><span class="comment">/// Starts the stopwatch if not already running. 如果尚未运行，则启动秒表</span></span><br><span class="line"><span class="keyword">void</span> start() &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="PREFER-使用用名词短语注释变量、getter或setter"><a href="#PREFER-使用用名词短语注释变量、getter或setter" class="headerlink" title="PREFER 使用用名词短语注释变量、getter或setter"></a>PREFER 使用用名词短语注释变量、getter或setter</h3><p>doc注释应该强调属性是什么。即使对于可能进行计算或其他工作的getter也是如此。调用者关心的是工作的结果，而不是工作本身。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// The current day of the week, where `0` is Sunday.</span></span><br><span class="line"><span class="built_in">int</span> weekday;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// The number of checked buttons on the page.</span></span><br><span class="line"><span class="built_in">int</span> <span class="keyword">get</span> checkedCount =&gt; ...</span><br></pre></td></tr></table></figure></p>
+<h3 id="PREFER-对库或者类型注释使用名词短语"><a href="#PREFER-对库或者类型注释使用名词短语" class="headerlink" title="PREFER 对库或者类型注释使用名词短语"></a>PREFER 对库或者类型注释使用名词短语</h3><p>类Doc注释通常是程序中最重要的文档。它们描述了类型的不变量，建立了它使用的术语，并为类的成员提供了其他文档注释的上下文。在这里做一点额外的努力可以使所有其他成员更容易记录<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// A chunk of non-breaking output text terminated by a hard or soft newline.由硬或软换行符终止的一大块非破坏输出文本</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// ...</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Chunk</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="CONSIDER-文档注释中代码示例"><a href="#CONSIDER-文档注释中代码示例" class="headerlink" title="CONSIDER 文档注释中代码示例"></a>CONSIDER 文档注释中代码示例</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// Returns the lesser of two numbers.</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// ```dart</span></span><br><span class="line"><span class="comment">/// min(5, 3) == 3</span></span><br><span class="line"><span class="comment">///</span></span><br></pre></td></tr></table></figure>
+<p>num min(num a, num b) =&gt; …<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">### DO 使用方括号来引用范围内标识符</span><br><span class="line">如果在方括号中包含变量，方法或类型名称等内容，则dartdoc会查找名称并链接到相关的API文档。括号是可选的，但使用它可以在引用方法或构造函数时更清晰</span><br><span class="line">```dart</span><br><span class="line"><span class="comment">/// Throws a [StateError] if ... 抛出[StateError] if  </span></span><br><span class="line"><span class="comment">/// similar to [anotherMethod()], but ... 类似于[anotherMethod （）]，但是......</span></span><br></pre></td></tr></table></figure></p>
+<p>要链接到特定类的成员，请使用以点分隔的类名和成员名：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="markdown">/// Similar to [Duration.inDays], </span>but<span class="markdown"> handles fractional days. 与[Duration.inDays]类似，但...</span></span></span><br></pre></td></tr></table></figure></p>
+<p>点语法也可用于引用命名构造函数。对于未命名的构造函数，在类名后面加上括号：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="markdown">/// To create </span>a<span class="markdown"> point, call [Point()] or use [Point.polar()] to ...要创建一个点，请调用[Point（）]或使用[Point.polar（）]来...</span></span></span><br></pre></td></tr></table></figure></p>
+<h3 id="DO-用平实的语句来解释参数、返回值和异常。"><a href="#DO-用平实的语句来解释参数、返回值和异常。" class="headerlink" title="DO 用平实的语句来解释参数、返回值和异常。"></a>DO 用平实的语句来解释参数、返回值和异常。</h3><p>其他语言使用详细标记和部分来描述方法的参数和返回值,即将其描述集成到方法的描述中，并使用方括号突出显示参数。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"></span><br><span class="line"><span class="comment"><span class="markdown">/// Defines </span>a<span class="markdown"> flag. 定义一个标志</span></span></span><br><span class="line"><span class="comment"><span class="markdown">///</span></span></span><br><span class="line"><span class="comment"><span class="markdown">/// Throws </span>an<span class="markdown"> [ArgumentError] if there is already </span>an<span class="markdown"> option named [name] or 如果已经有一个名为[name]的选项或</span></span></span><br><span class="line"><span class="comment"><span class="markdown">/// there is already </span>an<span class="markdown"> option using abbreviation [abbr]. Returns </span>the<span class="markdown"> new flag. 已经有一个使用缩写[abbr]的选项，则抛出[ArgumentError ]。返回新标志</span></span></span><br><span class="line">Flag addFlag(<span class="built_in">String</span> name, <span class="built_in">String</span> abbr) =&gt; ...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"></span><br><span class="line"><span class="comment"><span class="markdown">/// Defines </span>a<span class="markdown"> flag with </span>the<span class="markdown"> given name and abbreviation.定义具有给定名称和缩写的标志</span></span></span><br><span class="line"><span class="comment"><span class="markdown">///</span></span></span><br><span class="line"><span class="comment"><span class="markdown">/// @param name The name of </span>the<span class="markdown"> flag. @param name标志的名称</span></span></span><br><span class="line"><span class="comment"><span class="markdown">/// @param abbr The abbreviation for </span>the<span class="markdown"> flag.</span></span></span><br><span class="line"><span class="comment"><span class="markdown">/// @returns The new flag.</span></span></span><br><span class="line"><span class="comment"><span class="markdown">/// @throws ArgumentError If there is already </span>an<span class="markdown"> option with</span></span></span><br><span class="line"><span class="comment"><span class="markdown">///     </span>the<span class="markdown"> given name or abbreviation.</span></span></span><br><span class="line">Flag addFlag(<span class="built_in">String</span> name, <span class="built_in">String</span> abbr) =&gt; ...</span><br></pre></td></tr></table></figure></p>
+<h3 id="DO-在元数据注释之前放置文档注释"><a href="#DO-在元数据注释之前放置文档注释" class="headerlink" title="DO 在元数据注释之前放置文档注释"></a>DO 在元数据注释之前放置文档注释</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Good</span></span><br><span class="line"></span><br><span class="line"><span class="comment"><span class="markdown">/// A button that can be flipped on and off. 可以打开和关闭的按钮。</span></span></span><br><span class="line"><span class="meta">@Component</span>(selector: <span class="string">'toggle'</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ToggleComponent</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span>(selector: <span class="string">'toggle'</span>)</span><br><span class="line"><span class="comment"><span class="markdown">/// A button that can be flipped on and off.</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ToggleComponent</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h2><p>您可以在文档注释中使用大多数<a href="https://daringfireball.net/projects/markdown/" target="_blank" rel="noopener">markdown</a>格式，dartdoc将使用<a href="https://pub.dartlang.org/packages/markdown" target="_blank" rel="noopener">markdown包</a>相应地处理它。</p>
+<p>有很多指南已经向您介绍Markdown。它普遍受欢迎是我们选择它的原因。这里只是一个简单的例子，让您了解所支持的内容：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="markdown">/// This is </span>a<span class="markdown"> paragraph of regular text.</span></span></span><br><span class="line"><span class="comment"><span class="markdown">///</span></span></span><br><span class="line"><span class="comment"><span class="markdown">/// This sentence has <span class="emphasis">*two*</span> <span class="emphasis">_emphasized_</span> words (italics) and <span class="strong">**two**</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown">/// <span class="strong">__strong__</span> ones (bold).</span></span></span><br><span class="line"><span class="comment"><span class="markdown">///</span></span></span><br><span class="line"><span class="comment"><span class="markdown">/// A blank line creates </span>a<span class="markdown"> separate paragraph. It has some <span class="code">`inline code`</span></span></span></span><br><span class="line"><span class="comment"><span class="markdown">/// delimited using backticks.</span></span></span><br><span class="line"><span class="comment"><span class="markdown">///</span></span></span><br><span class="line"><span class="comment"><span class="markdown">/// * Unordered lists.</span></span></span><br><span class="line"><span class="comment"><span class="markdown">/// * Look </span>like<span class="markdown"> ASCII bullet lists.</span></span></span><br><span class="line"><span class="comment"><span class="markdown">/// * You can also use <span class="code">`-`</span> or <span class="code">`+`</span>.</span></span></span><br><span class="line"><span class="comment"><span class="markdown">///</span></span></span><br><span class="line"><span class="comment"><span class="markdown">/// 1. Numbered lists.</span></span></span><br><span class="line"><span class="comment"><span class="markdown">/// 2. Are, well, numbered.</span></span></span><br><span class="line"><span class="comment"><span class="markdown">/// 1. But </span>the<span class="markdown"> values </span>don't<span class="markdown"> matter.</span></span></span><br><span class="line"><span class="comment"><span class="markdown">///</span></span></span><br><span class="line"><span class="comment"><span class="markdown">///     * You can nest lists too.</span></span></span><br><span class="line"><span class="comment"><span class="markdown">///     * They must be indented at least 4 spaces.</span></span></span><br><span class="line"><span class="comment"><span class="markdown">///     * (Well, 5 including </span>the<span class="markdown"> space after <span class="code">`///`</span>.)</span></span></span><br><span class="line"><span class="comment"><span class="markdown">///</span></span></span><br><span class="line"><span class="comment"><span class="markdown">/// Code blocks </span>are<span class="markdown"> fenced in triple backticks:</span></span></span><br><span class="line"><span class="comment"><span class="markdown">///</span></span></span><br><span class="line"><span class="comment"><span class="markdown">///</span></span></span><br></pre></td></tr></table></figure></p>
+<p>/// this.code<br>///     .will<br>///     .retain(its, formatting);<br>/// <figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> The code language (for syntax highlighting) defaults to Dart. You can</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> specify it by putting the name of the language after the opening backticks:</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> ```html</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;h1&gt;</span>HTML is magical!<span class="doctag">&lt;/h1&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span></span></span><br></pre></td></tr></table></figure></p>
+<p>///<br>/// Links can be:<br>///<br>/// <em> <a href="http://www.just-a-bare-url.com" target="_blank" rel="noopener">http://www.just-a-bare-url.com</a><br>/// </em> <a href="http://google.com" target="_blank" rel="noopener">with the URL inline</a><br>/// * [or separated out][ref link]<br>///<br>/// [ref link]: <a href="http://google.com" target="_blank" rel="noopener">http://google.com</a><br>///<br>/// # A Header<br>///<br>/// ## A subheader<br>///<br>/// ### A subsubheader<br>///<br>/// #### If you need this many levels of headers, you’re doing it wrong<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">### AVOID 过度使用markdown</span><br><span class="line">如有疑问，请格式化。使用格式化以阐明您的内容，而不是替换它。</span><br><span class="line">### AVOID 使用HTML进行格式化</span><br><span class="line">在极少数情况下使用它可能很有用，例如表格，但在几乎所有情况下，如果它在Markdown中过于复杂，你最好不要表达它。</span><br><span class="line">### PREFER 代码块使用\</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"></span><br><span class="line"><span class="comment"><span class="markdown">/// You can use [CodeBlockExample] </span>like<span class="markdown"> this:</span></span></span><br><span class="line"><span class="comment"><span class="markdown">///</span></span></span><br><span class="line"><span class="comment"><span class="markdown">///</span></span></span><br></pre></td></tr></table></figure>
+<p>/// var example = CodeBlockExample();<br>/// print(example.isItGreat); // “Yes.”<br>/// <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/// You can use [CodeBlockExample] like this:</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">///     var example = CodeBlockExample();</span></span><br><span class="line"><span class="comment">///</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="PREFER-简洁"><a href="#PREFER-简洁" class="headerlink" title="PREFER 简洁"></a>PREFER 简洁</h3><p>要清晰准确，但也要简洁</p>
+<h3 id="AVOID-缩写和首字母缩略词，除非它们是显而易见的"><a href="#AVOID-缩写和首字母缩略词，除非它们是显而易见的" class="headerlink" title="AVOID 缩写和首字母缩略词，除非它们是显而易见的"></a>AVOID 缩写和首字母缩略词，除非它们是显而易见的</h3><p>许多人不知道“ie”，“eg”和“et al。”是什么意思。你确信你所在领域的每个人都知道这个首字母缩略词可能并不像你想象的那么广为人知。</p>
+<h3 id="PREFER-首先使用“this”而不是“the”来引用成员的实例"><a href="#PREFER-首先使用“this”而不是“the”来引用成员的实例" class="headerlink" title="PREFER 首先使用“this”而不是“the”来引用成员的实例"></a>PREFER 首先使用“this”而不是“the”来引用成员的实例</h3><p>记录类的成员时，通常需要返回调用该成员的对象。使用“the”可能含糊不清。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span> </span>&#123;</span><br><span class="line">  <span class="comment"><span class="markdown">/// The value this wraps.</span></span></span><br><span class="line">  <span class="keyword">var</span> _value;</span><br><span class="line"></span><br><span class="line">  <span class="comment"><span class="markdown">/// True if this box contains </span>a<span class="markdown"> value.</span></span></span><br><span class="line">  <span class="built_in">bool</span> <span class="keyword">get</span> hasValue =&gt; _value != <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Aries</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://ranna520.github.io/2019/02/25/高效编写Dart-文档指南/" title="高效编写Dart--文档指南">https://ranna520.github.io/2019/02/25/高效编写Dart-文档指南/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/dart/" rel="tag"># dart</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/25/高效编写Dart-样式指南/" rel="next" title="高效编写Dart--样式指南">
+                <i class="fa fa-chevron-left"></i> 高效编写Dart--样式指南
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/25/高效编写Dart-使用指南/" rel="prev" title="高效编写Dart--使用指南">
+                高效编写Dart--使用指南 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Aries">
+            
+              <p class="site-author-name" itemprop="name">Aries</p>
+              <p class="site-description motion-element" itemprop="description">记录成长的过程</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何阅读指南"><span class="nav-number">1.</span> <span class="nav-text">如何阅读指南</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注释"><span class="nav-number">2.</span> <span class="nav-text">注释</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DO-格式化注释，例如句子"><span class="nav-number">2.1.</span> <span class="nav-text">DO 格式化注释，例如句子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DON’T-将注释写在文档中"><span class="nav-number">2.2.</span> <span class="nav-text">DON’T 将注释写在文档中</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Doc-注释"><span class="nav-number">3.</span> <span class="nav-text">Doc 注释</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DO-使用-表示doc注释记录成员和类型"><span class="nav-number">3.1.</span> <span class="nav-text">DO 使用 /// 表示doc注释记录成员和类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PREFER-为公共API编写doc注释"><span class="nav-number">3.2.</span> <span class="nav-text">PREFER 为公共API编写doc注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CONSIDER-编写库级文档评论"><span class="nav-number">3.3.</span> <span class="nav-text">CONSIDER 编写库级文档评论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CONSIDER-为私有API编写doc注释"><span class="nav-number">3.4.</span> <span class="nav-text">CONSIDER 为私有API编写doc注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DO-用单句摘要开始文档评论"><span class="nav-number">3.5.</span> <span class="nav-text">DO 用单句摘要开始文档评论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DO-将文档评论的第一句作为一个独立的段落"><span class="nav-number">3.6.</span> <span class="nav-text">DO 将文档评论的第一句作为一个独立的段落</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AVOID-与周围环境的冗余"><span class="nav-number">3.7.</span> <span class="nav-text">AVOID 与周围环境的冗余</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PREFER-启动函数或方法注释与第三人称动词"><span class="nav-number">3.8.</span> <span class="nav-text">PREFER 启动函数或方法注释与第三人称动词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PREFER-使用用名词短语注释变量、getter或setter"><span class="nav-number">3.9.</span> <span class="nav-text">PREFER 使用用名词短语注释变量、getter或setter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PREFER-对库或者类型注释使用名词短语"><span class="nav-number">3.10.</span> <span class="nav-text">PREFER 对库或者类型注释使用名词短语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CONSIDER-文档注释中代码示例"><span class="nav-number">3.11.</span> <span class="nav-text">CONSIDER 文档注释中代码示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DO-用平实的语句来解释参数、返回值和异常。"><span class="nav-number">3.12.</span> <span class="nav-text">DO 用平实的语句来解释参数、返回值和异常。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DO-在元数据注释之前放置文档注释"><span class="nav-number">3.13.</span> <span class="nav-text">DO 在元数据注释之前放置文档注释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Markdown"><span class="nav-number">4.</span> <span class="nav-text">Markdown</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PREFER-简洁"><span class="nav-number">4.1.</span> <span class="nav-text">PREFER 简洁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AVOID-缩写和首字母缩略词，除非它们是显而易见的"><span class="nav-number">4.2.</span> <span class="nav-text">AVOID 缩写和首字母缩略词，除非它们是显而易见的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PREFER-首先使用“this”而不是“the”来引用成员的实例"><span class="nav-number">4.3.</span> <span class="nav-text">PREFER 首先使用“this”而不是“the”来引用成员的实例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aries</span>
+
+  
+  <div class="powered-by">
+  &nbsp;
+    <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+      本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+  </div>
+  
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

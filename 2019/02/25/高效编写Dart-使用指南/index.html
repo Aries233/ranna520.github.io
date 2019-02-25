@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="如何阅读指南 DO 应始终遵循的准则 DON&amp;#39;T 不应该这么使用的准则 PREFER 应该遵循的准则，但是在某些情况下，可以根据个人理解忽略，不遵循 AVOID 不应该遵循的准则，但是在某些情况下，可以根据个人理解忽略，不遵循 CONSIDER 可遵循或者不遵循的规则，取决于个人偏好  库这些指南可帮助您以一致、可维护的方式从多个文件中编写程序。为了简化这些指导原则，他们使用“import">
+<meta name="keywords" content="tag">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高效编写Dart--使用指南">
+<meta property="og:url" content="https://ranna520.github.io/2019/02/25/高效编写Dart-使用指南/index.html">
+<meta property="og:site_name" content="Aries&#39;s Blog">
+<meta property="og:description" content="如何阅读指南 DO 应始终遵循的准则 DON&amp;#39;T 不应该这么使用的准则 PREFER 应该遵循的准则，但是在某些情况下，可以根据个人理解忽略，不遵循 AVOID 不应该遵循的准则，但是在某些情况下，可以根据个人理解忽略，不遵循 CONSIDER 可遵循或者不遵循的规则，取决于个人偏好  库这些指南可帮助您以一致、可维护的方式从多个文件中编写程序。为了简化这些指导原则，他们使用“import">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-02-25T11:35:51.680Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高效编写Dart--使用指南">
+<meta name="twitter:description" content="如何阅读指南 DO 应始终遵循的准则 DON&amp;#39;T 不应该这么使用的准则 PREFER 应该遵循的准则，但是在某些情况下，可以根据个人理解忽略，不遵循 AVOID 不应该遵循的准则，但是在某些情况下，可以根据个人理解忽略，不遵循 CONSIDER 可遵循或者不遵循的规则，取决于个人偏好  库这些指南可帮助您以一致、可维护的方式从多个文件中编写程序。为了简化这些指导原则，他们使用“import">
+
+
+
+
+
+
+  <link rel="canonical" href="https://ranna520.github.io/2019/02/25/高效编写Dart-使用指南/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>高效编写Dart--使用指南 | Aries's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Aries's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ranna520.github.io/2019/02/25/高效编写Dart-使用指南/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aries">
+      <meta itemprop="description" content="记录成长的过程">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aries's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">高效编写Dart--使用指南
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-25 19:34:25 / 修改时间：19:35:51" itemprop="dateCreated datePublished" datetime="2019-02-25T19:34:25+08:00">2019-02-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="如何阅读指南"><a href="#如何阅读指南" class="headerlink" title="如何阅读指南"></a>如何阅读指南</h2><ul>
+<li><code>DO</code> 应始终遵循的准则</li>
+<li><code>DON&#39;T</code> 不应该这么使用的准则</li>
+<li><code>PREFER</code> 应该遵循的准则，但是在某些情况下，可以根据个人理解忽略，不遵循</li>
+<li><code>AVOID</code> 不应该遵循的准则，但是在某些情况下，可以根据个人理解忽略，不遵循</li>
+<li><code>CONSIDER</code> 可遵循或者不遵循的规则，取决于个人偏好</li>
+</ul>
+<h2 id="库"><a href="#库" class="headerlink" title="库"></a>库</h2><p>这些指南可帮助您以一致、可维护的方式从多个文件中编写程序。为了简化这些指导原则，他们使用“import”来涵盖<code>import</code>和<code>export</code>指示.该指南同样适用于两者。<br><a id="more"></a></p>
+<h3 id="DO-part-of指令中使用字符串"><a href="#DO-part-of指令中使用字符串" class="headerlink" title="DO part of指令中使用字符串"></a>DO part of指令中使用字符串</h3><p>开发中应该避免使用<code>part</code>。如果您确实选择使用 part将部分库拆分为另一个文件，则Dart要求另一个文件依次指示它所属的库。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span> my_library;</span><br><span class="line"></span><br><span class="line"><span class="keyword">part</span> <span class="string">"some/other/file.dart"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="keyword">part</span> of <span class="string">"../../my_library.dart"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="keyword">part</span> of my_library;</span><br></pre></td></tr></table></figure></p>
+<h3 id="DON’T-导入另一个包的src目录中的库"><a href="#DON’T-导入另一个包的src目录中的库" class="headerlink" title="DON’T 导入另一个包的src目录中的库"></a>DON’T 导入另一个包的src目录中的库</h3><p>lib下的src目录被指定为由自己实现的私有库。包维护人员可以自由地对src下的代码进行彻底的更改，而不会对包造成破坏。</p>
+<p>这意味着，如果您导入其他包的私有库，那么该软件包的一个次要的、理论上非破坏性的版本可能都会破坏你的代码。</p>
+<h3 id="PREFER-导入包的lib目录中的库时的使用相对路径"><a href="#PREFER-导入包的lib目录中的库时的使用相对路径" class="headerlink" title="PREFER 导入包的lib目录中的库时的使用相对路径"></a>PREFER 导入包的lib目录中的库时的使用相对路径</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/avoid_relative_lib_imports.html" target="_blank" rel="noopener">avoid_relative_lib_imports</a></p>
+<p>当lib从同一个包中的另一个库引用包的目录中的库时<code>相对URI</code>或<code>显式package:</code>都能实现。<br>例如，假设你的目录结构如下：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">my_package</span><br><span class="line">└─ lib</span><br><span class="line">   ├─ src</span><br><span class="line">   │  └─ utils.dart</span><br><span class="line">   └─ api.dart</span><br></pre></td></tr></table></figure></p>
+<p>如果api.dart想要导入utils.dart，它应该使用：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'src/utils.dart'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'package:my_package/src/utils.dart'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>遵循以下两条规则：</p>
+<ul>
+<li>导入路径永远不应包含<code>/lib/</code></li>
+<li>lib下的库不应该使用<code>../</code>要转义<code>lib</code>目录。</li>
+</ul>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h3 id="DO-使用相邻的字符串来连接字符串文字"><a href="#DO-使用相邻的字符串来连接字符串文字" class="headerlink" title="DO 使用相邻的字符串来连接字符串文字"></a>DO 使用相邻的字符串来连接字符串文字</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/prefer_adjacent_string_concatenation.html" target="_blank" rel="noopener">prefer_adjacent_string_concatenation</a><br>如果你有两个字符串文字——不是值，而是实际引用的文字形式——你不需要<code>+</code>用来连接它们。就像在C和C ++中一样，<code>只需将它们放在一起就可以了</code>。这是制作不适合一行的单个长字符串的好方法。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line">raiseAlarm(</span><br><span class="line">    <span class="string">'ERROR: Parts of the spaceship are on fire. Other '</span></span><br><span class="line">    <span class="string">'parts are overrun by martians. Unclear which are which.'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line">raiseAlarm(<span class="string">'ERROR: Parts of the spaceship are on fire. Other '</span> +</span><br><span class="line">    <span class="string">'parts are overrun by martians. Unclear which are which.'</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="PREFER-使用插值来组合字符串和值"><a href="#PREFER-使用插值来组合字符串和值" class="headerlink" title="PREFER 使用插值来组合字符串和值"></a>PREFER 使用插值来组合字符串和值</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/prefer_interpolation_to_compose_strings.html" target="_blank" rel="noopener">prefer_interpolation_to_compose_strings</a><br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="string">'Hello, <span class="subst">$name</span>! You are <span class="subst">$&#123;year - birth&#125;</span> years old.'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="string">'Hello, '</span> + name + <span class="string">'! You are '</span> + (year - birth).toString() + <span class="string">' y...'</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="AVOID-在不需要时使用花括号进行插值"><a href="#AVOID-在不需要时使用花括号进行插值" class="headerlink" title="AVOID 在不需要时使用花括号进行插值"></a>AVOID 在不需要时使用花括号进行插值</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/unnecessary_brace_in_string_interps.html" target="_blank" rel="noopener">unnecessary_brace_in_string_interps</a><br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="string">'Hi, <span class="subst">$name</span>!'</span></span><br><span class="line"><span class="string">"Wear your wildest <span class="subst">$decade<span class="string">'s outfit."</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">'</span></span>Wear your wildest <span class="subst">$&#123;decade&#125;</span>s outfit.'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">// Bad</span></span><br><span class="line"><span class="string">'Hi, <span class="subst">$&#123;name&#125;</span>!'</span></span><br><span class="line"><span class="string">"</span>Wear your wildest $&#123;decade&#125;<span class="string">'s outfit."</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><p>Dart支持四种集合类型：lists（列表）, maps, queues（队列）, and sets（集合）。</p>
+<h3 id="DO-尽可能使用集合字面意义的方式"><a href="#DO-尽可能使用集合字面意义的方式" class="headerlink" title="DO 尽可能使用集合字面意义的方式"></a>DO 尽可能使用集合字面意义的方式</h3><p>有两种方法可以制作一个空的可增长列表：<code>[]</code>和<code>List()</code>。同样，有三种方法可以使一个空链接哈希映射：<code>{}， Map()，和LinkedHashMap()</code>。<br>如果要创建<code>不可扩展的列表或其他一些自定义集合类型</code>，那么请务必使用<code>构造函数</code>。否则，请使用<code>字面意义</code>的语法。核心库公开了那些构造函数以便于采用，但惯用的Dart代码不使用它们。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="keyword">var</span> points = [];</span><br><span class="line"><span class="keyword">var</span> addresses = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="keyword">var</span> points = <span class="built_in">List</span>();</span><br><span class="line"><span class="keyword">var</span> addresses = <span class="built_in">Map</span>();</span><br></pre></td></tr></table></figure></p>
+<p>如果重要的话，你甚至可以为它们提供一个类型参数。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="keyword">var</span> points = &lt;Point&gt;[];</span><br><span class="line"><span class="keyword">var</span> addresses = &lt;<span class="built_in">String</span>, Address&gt;&#123;&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="keyword">var</span> points = <span class="built_in">List</span>&lt;Point&gt;();</span><br><span class="line"><span class="keyword">var</span> addresses = <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, Address&gt;();</span><br></pre></td></tr></table></figure></p>
+<p>注意，这并不适用于这些类的<code>命名构造函数</code>。List.from()、Map.fromIterable()都有它们的用途。如果你传递一个大小来通过List()创建一个不可增长的大小，那么使用构造函数的方式创建是有意义的。</p>
+<h3 id="DON’T-用-length来查看集合是否为空"><a href="#DON’T-用-length来查看集合是否为空" class="headerlink" title="DON’T 用.length来查看集合是否为空"></a>DON’T 用.length来查看集合是否为空</h3><p>调用<code>.length</code>只是为了查看集合是否包含任何内容可能会非常缓慢。相反，有更快，更可读的getter：<code>.isEmpty</code>和 <code>.isNotEmpty</code><br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="keyword">if</span> (lunchBox.isEmpty) <span class="keyword">return</span> <span class="string">'so hungry...'</span>;</span><br><span class="line"><span class="keyword">if</span> (words.isNotEmpty) <span class="keyword">return</span> words.join(<span class="string">' '</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="keyword">if</span> (lunchBox.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">'so hungry...'</span>;</span><br><span class="line"><span class="keyword">if</span> (!words.isEmpty) <span class="keyword">return</span> words.join(<span class="string">' '</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="CONSIDER-使用高阶方法转换序列"><a href="#CONSIDER-使用高阶方法转换序列" class="headerlink" title="CONSIDER 使用高阶方法转换序列"></a>CONSIDER 使用高阶方法转换序列</h3><p>如果你有一个集合并希望从它产生一个<code>新修改的集合</code>，使用<code>.map()，.where()以及其他方便的方法</code>，往往更短，更简明。使用这些而不是命令性<code>for</code>循环可以清楚地表明您的意图是生成新序列而不产生副作用。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> aquaticNames = animals</span><br><span class="line">    .where((animal) =&gt; animal.isAquatic)</span><br><span class="line">    .map((animal) =&gt; animal.name);</span><br></pre></td></tr></table></figure></p>
+<h3 id="AVOID-使用Iterable-forEach-函数"><a href="#AVOID-使用Iterable-forEach-函数" class="headerlink" title="AVOID 使用Iterable.forEach()函数"></a>AVOID 使用Iterable.forEach()函数</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/avoid_function_literals_in_foreach_calls.html" target="_blank" rel="noopener">avoid_function_literals_in_foreach_calls</a><br>forEach()函数在JavaScript中被广泛使用，因为内置 for-in循环不能达到您通常想要的效果。在Dart中，如果要迭代序列，那么惯用的方法就是使用循环。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> person <span class="keyword">in</span> people) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line">people.forEach((person) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>例外情况是，如果要执行的操作是调用一些已存在的函数，并将每个元素作为参数。在那种情况下，forEach()很方便。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">people.forEach(<span class="built_in">print</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="DON’T-使用List-from-，除非您打算更改结果的类型"><a href="#DON’T-使用List-from-，除非您打算更改结果的类型" class="headerlink" title="DON’T 使用List.from()，除非您打算更改结果的类型"></a>DON’T 使用List.from()，除非您打算更改结果的类型</h3><p>给定Iterable，有两种显而易见的方法可以生成包含相同元素的新List：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> copy1 = iterable.toList();</span><br><span class="line"><span class="keyword">var</span> copy2 = <span class="built_in">List</span>.from(iterable);</span><br></pre></td></tr></table></figure></p>
+<p>最明显的区别是第一个更短。重要的区别是，第一个保留了原始对象的类型参数:<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Creates a List&lt;int&gt;:</span></span><br><span class="line"><span class="keyword">var</span> iterable = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Prints "List&lt;int&gt;":</span></span><br><span class="line"><span class="built_in">print</span>(iterable.toList().runtimeType);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Creates a List&lt;int&gt;:</span></span><br><span class="line"><span class="keyword">var</span> iterable = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Prints "List&lt;dynamic&gt;":</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">List</span>.from(iterable).runtimeType);</span><br></pre></td></tr></table></figure></p>
+<p>如果要更改类型，则调用List.from()很有用：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> numbers = [<span class="number">1</span>, <span class="number">2.3</span>, <span class="number">4</span>]; <span class="comment">// List&lt;num&gt;.</span></span><br><span class="line">numbers.removeAt(<span class="number">1</span>); <span class="comment">// Now it only contains integers.</span></span><br><span class="line"><span class="keyword">var</span> ints = <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt;.from(numbers);</span><br></pre></td></tr></table></figure></p>
+<p>但是，如果您的目标只是复制iterable并保留其原始类型，或者您不关心类型，那么请使用toList()。</p>
+<h3 id="DO-whereType-按类型过滤集合"><a href="#DO-whereType-按类型过滤集合" class="headerlink" title="DO whereType()按类型过滤集合"></a>DO whereType()按类型过滤集合</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/prefer_iterable_whereType.html" target="_blank" rel="noopener">prefer_iterable_whereType</a><br>假设您有一个包含对象混合的数组，并且您希望只获取整数。你可以where()像这样使用：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="keyword">var</span> objects = [<span class="number">1</span>, <span class="string">"a"</span>, <span class="number">2</span>, <span class="string">"b"</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> ints = objects.whereType&lt;<span class="built_in">int</span>&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="comment">// 它返回一个可能不是你想要的类型的iterable。在这里的示例中，它返回一个Iterable&lt;Object&gt;即使你可能想要一个，Iterable&lt;int&gt;因为那是你要过滤它的类型。</span></span><br><span class="line"><span class="keyword">var</span> objects = [<span class="number">1</span>, <span class="string">"a"</span>, <span class="number">2</span>, <span class="string">"b"</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> ints = objects.where((e) =&gt; e <span class="keyword">is</span> <span class="built_in">int</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这是冗长的，并导致创建两个包装器，具有两层间接和冗余运行时检查。</span></span><br><span class="line"><span class="keyword">var</span> objects = [<span class="number">1</span>, <span class="string">"a"</span>, <span class="number">2</span>, <span class="string">"b"</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> ints = objects.where((e) =&gt; e <span class="keyword">is</span> <span class="built_in">int</span>).cast&lt;<span class="built_in">int</span>&gt;();</span><br></pre></td></tr></table></figure></p>
+<h3 id="DON’T-当附近的操作可以执行时，使用cast"><a href="#DON’T-当附近的操作可以执行时，使用cast" class="headerlink" title="DON’T 当附近的操作可以执行时，使用cast()"></a>DON’T 当附近的操作可以执行时，使用cast()</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="keyword">var</span> stuff = &lt;<span class="keyword">dynamic</span>&gt;[<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> ints = <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt;.from(stuff);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="keyword">var</span> stuff = &lt;<span class="keyword">dynamic</span>&gt;[<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> ints = stuff.toList().cast&lt;<span class="built_in">int</span>&gt;();</span><br></pre></td></tr></table></figure>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="keyword">var</span> stuff = &lt;<span class="keyword">dynamic</span>&gt;[<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> reciprocals = stuff.map&lt;<span class="built_in">double</span>&gt;((n) =&gt; <span class="number">1</span> / n);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="keyword">var</span> stuff = &lt;<span class="keyword">dynamic</span>&gt;[<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="keyword">var</span> reciprocals = stuff.map((n) =&gt; <span class="number">1</span> / n).cast&lt;<span class="built_in">double</span>&gt;();</span><br></pre></td></tr></table></figure>
+<h3 id="AVOID-使用cast"><a href="#AVOID-使用cast" class="headerlink" title="AVOID 使用cast()"></a>AVOID 使用cast()</h3><p>这是对上一个规则的更为柔和的概括。有时候没有附近的操作可以用来修复某些对象的类型。即便如此，尽可能避免使用cast()更改集合的类型。</p>
+<p>请改为选择以下任何选项：</p>
+<ul>
+<li><p>使用正确的类型创建它。更改首次创建集合的代码时，使其具有正确的类型。</p>
+</li>
+<li><p>在访问时强制转换元素。如果您立即迭代集合，则在迭代内部转换每个元素。</p>
+</li>
+<li><p>使用List.from()。如果您最终将访问集合中的大多数元素，并且您不需要该对象由原始活动对象支持，请使用它进行转换List.from()。</p>
+</li>
+</ul>
+<p>该<code>cast()</code>方法返回一个<code>惰性</code>集合，该集合检查每个操作的元素类型。如果<code>只对少数</code>元素执行少量操作，那么懒惰就会很好。但在许多情况下，延迟验证和包装的开销超过了好处。</p>
+<p>以下是使用正确类型创建它的示例：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; singletonList(<span class="built_in">int</span> value) &#123;</span><br><span class="line">  <span class="keyword">var</span> list = &lt;<span class="built_in">int</span>&gt;[];</span><br><span class="line">  list.add(value);</span><br><span class="line">  <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; singletonList(<span class="built_in">int</span> value) &#123;</span><br><span class="line">  <span class="keyword">var</span> list = []; <span class="comment">// List&lt;dynamic&gt;.</span></span><br><span class="line">  list.add(value);</span><br><span class="line">  <span class="keyword">return</span> list.cast&lt;<span class="built_in">int</span>&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这是在访问时转换每个元素：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="keyword">void</span> printEvens(<span class="built_in">List</span>&lt;<span class="built_in">Object</span>&gt; objects) &#123;</span><br><span class="line">  <span class="comment">// We happen to know the list only contains ints.</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> n <span class="keyword">in</span> objects) &#123;</span><br><span class="line">    <span class="keyword">if</span> ((n <span class="keyword">as</span> <span class="built_in">int</span>).isEven) <span class="built_in">print</span>(n);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="keyword">void</span> printEvens(<span class="built_in">List</span>&lt;<span class="built_in">Object</span>&gt; objects) &#123;</span><br><span class="line">  <span class="comment">// We happen to know the list only contains ints.</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> n <span class="keyword">in</span> objects.cast&lt;<span class="built_in">int</span>&gt;()) &#123;</span><br><span class="line">    <span class="keyword">if</span> (n.isEven) <span class="built_in">print</span>(n);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这是使用List.from()<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="built_in">int</span> median(<span class="built_in">List</span>&lt;<span class="built_in">Object</span>&gt; objects) &#123;</span><br><span class="line">  <span class="comment">// We happen to know the list only contains ints.</span></span><br><span class="line">  <span class="keyword">var</span> ints = <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt;.from(objects);</span><br><span class="line">  ints.sort();</span><br><span class="line">  <span class="keyword">return</span> ints[ints.length ~/ <span class="number">2</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="built_in">int</span> median(<span class="built_in">List</span>&lt;<span class="built_in">Object</span>&gt; objects) &#123;</span><br><span class="line">  <span class="comment">// We happen to know the list only contains ints.</span></span><br><span class="line">  <span class="keyword">var</span> ints = objects.cast&lt;<span class="built_in">int</span>&gt;();</span><br><span class="line">  ints.sort();</span><br><span class="line">  <span class="keyword">return</span> ints[ints.length ~/ <span class="number">2</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当然，这些替代方案并不总是有效，有时候cast()是正确的答案。但是考虑到这种方法有点危险和不可取——它可能很慢，如果你不小心，可能会在运行时失败。</p>
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><h3 id="DO-使用函数声明将函数绑定到名称"><a href="#DO-使用函数声明将函数绑定到名称" class="headerlink" title="DO 使用函数声明将函数绑定到名称"></a>DO 使用函数声明将函数绑定到名称</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/prefer_function_declarations_over_variables.html" target="_blank" rel="noopener">prefer_function_declarations_over_variables</a><br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  localFunction() &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="keyword">var</span> localFunction = () &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="DON’T-当省略时创建lambda"><a href="#DON’T-当省略时创建lambda" class="headerlink" title="DON’T 当省略时创建lambda"></a>DON’T 当省略时创建lambda</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/unnecessary_lambdas.html" target="_blank" rel="noopener">unnecessary_lambdas</a><br>如果您引用了对象上的一个方法，但是省略了圆括号，那么Dart会给您一个“tearoff”——一个闭包，它接受与该方法相同的参数，并在您调用它时调用它。</p>
+<p>如果有一个函数调用的方法具有与传递给它的参数相同的参数，则不需要手动将调用包装在lambda中。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line">names.forEach(<span class="built_in">print</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line">names.forEach((name) &#123;</span><br><span class="line">  <span class="built_in">print</span>(name);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><h3 id="DO-使用-将命名参数与其默认值分隔开"><a href="#DO-使用-将命名参数与其默认值分隔开" class="headerlink" title="DO 使用 = 将命名参数与其默认值分隔开"></a>DO 使用 = 将命名参数与其默认值分隔开</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/prefer_equal_for_default_values.html" target="_blank" rel="noopener">prefer_equal_for_default_values</a><br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="keyword">void</span> insert(<span class="built_in">Object</span> item, &#123;<span class="built_in">int</span> at = <span class="number">0</span>&#125;) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="keyword">void</span> insert(<span class="built_in">Object</span> item, &#123;<span class="built_in">int</span> at: <span class="number">0</span>&#125;) &#123; ... &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="DON’T-显式的设置默认值为null"><a href="#DON’T-显式的设置默认值为null" class="headerlink" title="DON’T 显式的设置默认值为null"></a>DON’T 显式的设置默认值为null</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/avoid_init_to_null.html" target="_blank" rel="noopener">avoid_init_to_null</a><br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="keyword">void</span> error([<span class="built_in">String</span> message]) &#123;</span><br><span class="line">  stderr.write(message ?? <span class="string">'\n'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="keyword">void</span> error([<span class="built_in">String</span> message = <span class="keyword">null</span>]) &#123;</span><br><span class="line">  stderr.write(message ?? <span class="string">'\n'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><h3 id="DON’T-将变量显式初始化为null"><a href="#DON’T-将变量显式初始化为null" class="headerlink" title="DON’T 将变量显式初始化为null"></a>DON’T 将变量显式初始化为null</h3><p>在Dart中，未自动显式初始化的变量或字段将初始化为null。这是由语言可靠地指定的。Dart中没有“未初始化记忆”的概念。添加 <strong>= null</strong> 是多余的，不需要。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="built_in">int</span> _nextId;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LazyId</span> </span>&#123;</span><br><span class="line">  <span class="built_in">int</span> _id;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">int</span> <span class="keyword">get</span> id &#123;</span><br><span class="line">    <span class="keyword">if</span> (_nextId == <span class="keyword">null</span>) _nextId = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (_id == <span class="keyword">null</span>) _id = _nextId++;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> _id;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="built_in">int</span> _nextId = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LazyId</span> </span>&#123;</span><br><span class="line">  <span class="built_in">int</span> _id = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">int</span> <span class="keyword">get</span> id &#123;</span><br><span class="line">    <span class="keyword">if</span> (_nextId == <span class="keyword">null</span>) _nextId = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (_id == <span class="keyword">null</span>) _id = _nextId++;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> _id;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="AVOID-存储可以计算的内容"><a href="#AVOID-存储可以计算的内容" class="headerlink" title="AVOID 存储可以计算的内容"></a>AVOID 存储可以计算的内容</h3><p>在设计类时，经常希望将多个视图暴露给相同的基础状态。通常，您会看到在构造函数中计算所有这些视图的代码，然后存储它们：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> </span>&#123;</span><br><span class="line">  <span class="built_in">num</span> radius;</span><br><span class="line">  <span class="built_in">num</span> area;</span><br><span class="line">  <span class="built_in">num</span> circumference;</span><br><span class="line"></span><br><span class="line">  Circle(<span class="built_in">num</span> radius)</span><br><span class="line">      : radius = radius,</span><br><span class="line">        area = pi * radius * radius,</span><br><span class="line">        circumference = pi * <span class="number">2.0</span> * radius;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这段代码有两个问题。首先，它可能会浪费内存。严格地说，面积和周长是缓存。它们是存储的计算，我们可以从已有的其他数据中重新计算。他们正在用增加的内存换取减少的CPU使用。</p>
+<p>更糟糕的是，代码是错误的。缓存的问题是无效——您如何知道缓存何时过期并需要重新计算?在这里，我们从不这样做，即使半径是可变的。您可以指定一个不同的值，那么面积和周长将保留它们以前的、现在不正确的值。</p>
+<p>为了正确处理缓存失效，我们需要这样做:<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> </span>&#123;</span><br><span class="line">  <span class="built_in">num</span> _radius;</span><br><span class="line">  <span class="built_in">num</span> <span class="keyword">get</span> radius =&gt; _radius;</span><br><span class="line">  <span class="keyword">set</span> radius(<span class="built_in">num</span> value) &#123;</span><br><span class="line">    _radius = value;</span><br><span class="line">    _recalculate();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">num</span> _area;</span><br><span class="line">  <span class="built_in">num</span> <span class="keyword">get</span> area =&gt; _area;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">num</span> _circumference;</span><br><span class="line">  <span class="built_in">num</span> <span class="keyword">get</span> circumference =&gt; _circumference;</span><br><span class="line"></span><br><span class="line">  Circle(<span class="keyword">this</span>._radius) &#123;</span><br><span class="line">    _recalculate();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> _recalculate() &#123;</span><br><span class="line">    _area = pi * _radius * _radius;</span><br><span class="line">    _circumference = pi * <span class="number">2.0</span> * _radius;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>要编写、维护、调试和读取的代码实在太多了。相反，您的第一个实现应该是:<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> </span>&#123;</span><br><span class="line">  <span class="built_in">num</span> radius;</span><br><span class="line"></span><br><span class="line">  Circle(<span class="keyword">this</span>.radius);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">num</span> <span class="keyword">get</span> area =&gt; pi * radius * radius;</span><br><span class="line">  <span class="built_in">num</span> <span class="keyword">get</span> circumference =&gt; pi * <span class="number">2.0</span> * radius;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="成员"><a href="#成员" class="headerlink" title="成员"></a>成员</h2><p>在Dart中，对象具有可以是函数（方法）或数据（实例变量）的成员</p>
+<h3 id="DON’T-在getter和setter中不必要地包装字段"><a href="#DON’T-在getter和setter中不必要地包装字段" class="headerlink" title="DON’T 在getter和setter中不必要地包装字段"></a>DON’T 在getter和setter中不必要地包装字段</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/unnecessary_getters_setters.html" target="_blank" rel="noopener">unnecessary_getters_setters</a></p>
+<p>在Java和C＃中，通常隐藏getter和setter（或C＃中的属性）后面的所有字段，即使实现只是转发到字段。这样，如果你需要在这些成员中做更多的工作，你可以不需要触摸呼叫。这是因为调用getter方法与访问Java中的字段不同，访问属性与访问C＃中的原始字段不是二进制兼容的。</p>
+<p>Dart没有这个限制。字段和getter / setter是完全无法区分的。您可以在类中公开一个字段，然后将其包装在getter和setter中，而不必触及任何使用该字段的代码。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> contents;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _contents;</span><br><span class="line">  <span class="keyword">get</span> contents =&gt; _contents;</span><br><span class="line">  <span class="keyword">set</span> contents(value) &#123;</span><br><span class="line">    _contents = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="PREFER-使用final字段来创建只读属性"><a href="#PREFER-使用final字段来创建只读属性" class="headerlink" title="PREFER 使用final字段来创建只读属性"></a>PREFER 使用final字段来创建只读属性</h3><p>如果您有一个外部代码应该能够看到但不能分配给它的字段，那么在许多情况下，一个简单的解决方案就是将其标记为final。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span> </span>&#123;</span><br><span class="line">  <span class="keyword">final</span> contents = [];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _contents;</span><br><span class="line">  <span class="keyword">get</span> contents =&gt; _contents;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当然，如果您需要在构造函数外部对字段进行内部分配，您可能需要执行“private field, public getter”模式，但在需要之前不要进行此操作。</p>
+<h3 id="CONSIDER-使用-gt-简单的成员"><a href="#CONSIDER-使用-gt-简单的成员" class="headerlink" title="CONSIDER 使用=&gt;简单的成员"></a>CONSIDER 使用=&gt;简单的成员</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/prefer_expression_function_bodies.html" target="_blank" rel="noopener">prefer_expression_function_bodies</a></p>
+<p>除了=&gt;用于<strong>函数表达式</strong>之外，Dart还允许您使用它来<strong>定义成员</strong>。该样式非常适合<strong>仅计算和返回值的简单成员</strong>。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">double</span> <span class="keyword">get</span> area =&gt; (right - left) * (bottom - top);</span><br><span class="line"></span><br><span class="line"><span class="built_in">bool</span> isReady(<span class="built_in">num</span> time) =&gt; minTime == <span class="keyword">null</span> || minTime &lt;= time;</span><br><span class="line"></span><br><span class="line"><span class="built_in">String</span> capitalize(<span class="built_in">String</span> name) =&gt;</span><br><span class="line">    <span class="string">'<span class="subst">$&#123;name[<span class="number">0</span>].toUpperCase()&#125;</span><span class="subst">$&#123;name.substring(<span class="number">1</span>)&#125;</span>'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>人们编写的代码似乎更喜欢=&gt;，但它很容易滥用它，并用代码很难结束阅读。如果您的声明超过几行或包含深层嵌套的表达式——级联和条件运算符是常见的违规者， 请使用块体和一些语句。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line">Treasure openChest(Chest chest, Point where) &#123;</span><br><span class="line">  <span class="keyword">if</span> (_opened.containsKey(chest)) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> treasure = Treasure(where);</span><br><span class="line">  treasure.addAll(chest.contents);</span><br><span class="line">  _opened[chest] = treasure;</span><br><span class="line">  <span class="keyword">return</span> treasure;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line">Treasure openChest(Chest chest, Point where) =&gt;</span><br><span class="line">    _opened.containsKey(chest) ? <span class="keyword">null</span> : _opened[chest] = Treasure(where)</span><br><span class="line">      ..addAll(chest.contents);</span><br></pre></td></tr></table></figure></p>
+<p>您还可以对不返回值的成员使用=&gt;。当setter很小并且有一个使用=&gt;的相应getter时，这是一种习惯用法。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">num</span> <span class="keyword">get</span> x =&gt; center.x;</span><br><span class="line"><span class="keyword">set</span> x(<span class="built_in">num</span> value) =&gt; center = Point(value, center.y);</span><br></pre></td></tr></table></figure></p>
+<h3 id="DON’T-用-this-当不需要避免shadowing时"><a href="#DON’T-用-this-当不需要避免shadowing时" class="headerlink" title="DON’T 用 this. 当不需要避免shadowing时"></a>DON’T 用 this. 当不需要避免shadowing时</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/unnecessary_this.html" target="_blank" rel="noopener">unnecessary_this</a><br>JavaScript要求显式this.引用当前正在执行其方法的对象上的成员，但类似Dart的C ++，Java和C＃不具有该限制。</p>
+<p>您唯一需要使用的this.是当具有相同名称的局部变量隐藏要访问的成员时。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> value;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> clear() &#123;</span><br><span class="line">    <span class="keyword">this</span>.update(<span class="keyword">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> update(value) &#123;</span><br><span class="line">    <span class="keyword">this</span>.value = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> value;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> clear() &#123;</span><br><span class="line">    update(<span class="keyword">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> update(value) &#123;</span><br><span class="line">    <span class="keyword">this</span>.value = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>请注意，构造函数参数从不影响构造函数初始化列表中的字段：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span> <span class="keyword">extends</span> <span class="title">BaseBox</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> value;</span><br><span class="line"></span><br><span class="line">  Box(value)</span><br><span class="line">      : value = value,</span><br><span class="line">        <span class="keyword">super</span>(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="DO-尽可能在声明时初始化字段"><a href="#DO-尽可能在声明时初始化字段" class="headerlink" title="DO 尽可能在声明时初始化字段"></a>DO 尽可能在声明时初始化字段</h3><p>如果字段不依赖于任何构造函数参数，那么应该在声明时初始化它。它使用更少的代码，并且确保如果类有多个构造函数，您不会忘记初始化它。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Folder</span> </span>&#123;</span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">String</span> name;</span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">List</span>&lt;Document&gt; contents = [];</span><br><span class="line"></span><br><span class="line">  Folder(<span class="keyword">this</span>.name);</span><br><span class="line">  Folder.temp() : name = <span class="string">'temporary'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Folder</span> </span>&#123;</span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">String</span> name;</span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">List</span>&lt;Document&gt; contents;</span><br><span class="line"></span><br><span class="line">  Folder(<span class="keyword">this</span>.name) : contents = [];</span><br><span class="line">  Folder.temp() : name = <span class="string">'temporary'</span>; <span class="comment">// Oops! Forgot contents.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当然，如果字段依赖于构造函数参数，或者由不同的构造函数进行不同的初始化，则本指南不适用</p>
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><h3 id="DO-尽可能使用初始化形式"><a href="#DO-尽可能使用初始化形式" class="headerlink" title="DO 尽可能使用初始化形式"></a>DO 尽可能使用初始化形式</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/prefer_initializing_formals.html" target="_blank" rel="noopener">prefer_initializing_formals</a><br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">  <span class="built_in">num</span> x, y;</span><br><span class="line">  Point(<span class="keyword">this</span>.x, <span class="keyword">this</span>.y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">  <span class="built_in">num</span> x, y;</span><br><span class="line">  Point(<span class="built_in">num</span> x, <span class="built_in">num</span> y) &#123;</span><br><span class="line">    <span class="keyword">this</span>.x = x;</span><br><span class="line">    <span class="keyword">this</span>.y = y;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>this.</code>构造函数参数之前的语法称为“初始化形式”。你不能总是利用它。特别是，使用它意味着参数在初始化列表中不可见。但是，当你能做到的时候，你就应该去做。</p>
+<h3 id="DON’T-类型注释初始化形式"><a href="#DON’T-类型注释初始化形式" class="headerlink" title="DON’T 类型注释初始化形式"></a>DON’T 类型注释初始化形式</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/type_init_formals.html" target="_blank" rel="noopener">type_init_formals</a><br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">  <span class="built_in">int</span> x, y;</span><br><span class="line">  Point(<span class="keyword">this</span>.x, <span class="keyword">this</span>.y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">  <span class="built_in">int</span> x, y;</span><br><span class="line">  Point(<span class="built_in">int</span> <span class="keyword">this</span>.x, <span class="built_in">int</span> <span class="keyword">this</span>.y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="DO-使用-而不是-空构造函数体"><a href="#DO-使用-而不是-空构造函数体" class="headerlink" title="DO 使用;而不是{}空构造函数体"></a>DO 使用;而不是{}空构造函数体</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/empty_constructor_bodies.html" target="_blank" rel="noopener">empty_constructor_bodies</a><br>在Dart中，具有空主体的构造函数可以用分号结束。(实际上，const构造函数需要它)。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">  <span class="built_in">int</span> x, y;</span><br><span class="line">  Point(<span class="keyword">this</span>.x, <span class="keyword">this</span>.y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">  <span class="built_in">int</span> x, y;</span><br><span class="line">  Point(<span class="keyword">this</span>.x, <span class="keyword">this</span>.y) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="DON’T-使用new"><a href="#DON’T-使用new" class="headerlink" title="DON’T 使用new"></a>DON’T 使用new</h3><p>Dart 2使new关键字成为可选的。即使在Dart 1中，它的含义也从来没有明确过，因为工厂构造函数意味着新的调用可能仍然不会实际返回新的对象。</p>
+<p>为了减少迁移的痛苦，这种语言仍然允许使用new，但是考虑到它已被弃用并从代码中删除它。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line">Widget build(BuildContext context) &#123;</span><br><span class="line">  <span class="keyword">return</span> Row(</span><br><span class="line">    children: [</span><br><span class="line">      RaisedButton(</span><br><span class="line">        child: Text(<span class="string">'Increment'</span>),</span><br><span class="line">      ),</span><br><span class="line">      Text(<span class="string">'Click!'</span>),</span><br><span class="line">    ],</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line">Widget build(BuildContext context) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Row(</span><br><span class="line">    children: [</span><br><span class="line">      <span class="keyword">new</span> RaisedButton(</span><br><span class="line">        child: <span class="keyword">new</span> Text(<span class="string">'Increment'</span>),</span><br><span class="line">      ),</span><br><span class="line">      <span class="keyword">new</span> Text(<span class="string">'Click!'</span>),</span><br><span class="line">    ],</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="DON’T-多余地使用const"><a href="#DON’T-多余地使用const" class="headerlink" title="DON’T 多余地使用const"></a>DON’T 多余地使用const</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/unnecessary_const.html" target="_blank" rel="noopener">unnecessary_const</a><br>在表达式必须是<strong>常量</strong>的上下文中，const关键字是隐式的，不需要写，也不应该写。这些上下文是其中的任何表达式：</p>
+<ul>
+<li>const集合文字。</li>
+<li>const构造函数调用</li>
+<li>元数据注释</li>
+<li>const变量声明的初始化</li>
+<li>交换用例表达式 - 紧接在case之前的部分:，而不是用例的主体。</li>
+</ul>
+<p>默认值不包括在这个列表中，因为Dart的未来版本可能支持非const默认值）<br>基本上，在写new而不是const时会出错的任何地方，Dart 2都允许您省略const<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="keyword">const</span> primaryColors = [</span><br><span class="line">  Color(<span class="string">"red"</span>, [<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>]),</span><br><span class="line">  Color(<span class="string">"green"</span>, [<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>]),</span><br><span class="line">  Color(<span class="string">"blue"</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>]),</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="keyword">const</span> primaryColors = <span class="keyword">const</span> [</span><br><span class="line">  <span class="keyword">const</span> Color(<span class="string">"red"</span>, <span class="keyword">const</span> [<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>]),</span><br><span class="line">  <span class="keyword">const</span> Color(<span class="string">"green"</span>, <span class="keyword">const</span> [<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>]),</span><br><span class="line">  <span class="keyword">const</span> Color(<span class="string">"blue"</span>, <span class="keyword">const</span> [<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>]),</span><br><span class="line">];</span><br></pre></td></tr></table></figure></p>
+<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><h3 id="AVOID-捕捉没有-on-的子句"><a href="#AVOID-捕捉没有-on-的子句" class="headerlink" title="AVOID 捕捉没有 on 的子句"></a>AVOID 捕捉没有 on 的子句</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/avoid_catches_without_on_clauses.html" target="_blank" rel="noopener">avoid_catches_without_on_clauses</a><br>一个没有on限定符的catch子句捕获try块中的代码抛出的任何内容。<a href="https://blog.codinghorror.com/new-programming-jargon/" target="_blank" rel="noopener">Pokemon异常处理</a>很可能不是您想要的。您的代码是否正确地处理了<a href="https://api.dartlang.org/stable/2.1.1/dart-core/StackOverflowError-class.html" target="_blank" rel="noopener">StackOverflowError</a>或<a href="https://api.dartlang.org/stable/2.1.1/dart-core/OutOfMemoryError-class.html" target="_blank" rel="noopener">OutOfMemoryError</a>?如果您错误地将错误的参数传递给try块中的方法，您是希望调试器将错误指向您，还是希望有用的<a href="ArgumentError">ArgumentError</a>被吞噬?在捕获抛出的<a href="https://api.dartlang.org/stable/dart-core/AssertionError-class.html" target="_blank" rel="noopener">assertionerror</a>之后，您希望代码中的任何assert()语句有效地消失吗?</p>
+<p>答案可能是“否”，在这种情况下，您应该过滤捕获的类型。在大多数情况下，您应该有一个on子句，它将您限制到您所知道的和正在正确处理的运行时故障的类型。</p>
+<p>在极少数情况下，您可能希望捕获任何运行时错误。这通常是在框架或底层代码中，这些代码试图将任意应用程序代码与问题隔离开来。即使在这里，捕获<a href="https://api.dartlang.org/stable/dart-core/Exception-class.html" target="_blank" rel="noopener">异常</a>通常也比捕获所有类型要好。Exception是所有运行时错误的基类，并排除指示代码中编程错误的错误。</p>
+<h3 id="DON’T-没有on子句情况下-放弃捕获的错误，"><a href="#DON’T-没有on子句情况下-放弃捕获的错误，" class="headerlink" title="DON’T 没有on子句情况下,放弃捕获的错误，"></a>DON’T 没有on子句情况下,放弃捕获的错误，</h3><p>如果您确实觉得需要捕获代码区域中可以抛出的所有内容，那么就用捕获的内容做一些事情。记录它，将它显示给用户或重新抛出它，但不要悄悄地丢弃它。</p>
+<h3 id="DO-抛出Error仅用于编程错误的对象"><a href="#DO-抛出Error仅用于编程错误的对象" class="headerlink" title="DO 抛出Error仅用于编程错误的对象"></a>DO 抛出Error仅用于编程错误的对象</h3><p><a href="https://api.dartlang.org/stable/2.1.1/index.html" target="_blank" rel="noopener">Error</a>类是程序错误的基类。当抛出该类型的对象或它的一个子接口(如ArgumentError)时，意味着代码中存在错误。当您的API想要向调用者报告它正在被错误地使用时，抛出一个错误会清楚地发送该信号。</p>
+<p>相反，如果异常是某种运行时故障，而该故障并不表示代码中有错误，那么抛出错误是一种误导。相反，抛出一个核心异常类或其他类型。</p>
+<h3 id="DON’T-显式捕获错误或实现错误的类型"><a href="#DON’T-显式捕获错误或实现错误的类型" class="headerlink" title="DON’T 显式捕获错误或实现错误的类型"></a>DON’T 显式捕获错误或实现错误的类型</h3><p>这是由上面得出的。由于错误指示代码中的错误，因此它应该展开整个调用堆栈，停止程序，并打印堆栈跟踪信息，以便找到并修复错误。</p>
+<p>捕捉这些类型的错误会破坏该过程并掩盖错误。不要在异常发生后添加错误处理代码来处理该异常，而是返回并修复最初导致异常抛出的代码。</p>
+<h3 id="DO-使用rethrow重新抛出捕获的异常"><a href="#DO-使用rethrow重新抛出捕获的异常" class="headerlink" title="DO 使用rethrow重新抛出捕获的异常"></a>DO 使用rethrow重新抛出捕获的异常</h3><p>Linter规则：<a href="https://dart-lang.github.io/linter/lints/use_rethrow_when_possible.html" target="_blank" rel="noopener">use_rethrow_when_possible</a><br>如果决定重新抛出异常，请使用rethrow语句，而不是使用throw抛出相同的异常对象。rethrow保留异常的原始堆栈跟踪。另一方面，throw将堆栈跟踪重置为最后一个抛出的位置。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  somethingRisky();</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!canHandle(e)) <span class="keyword">throw</span> e;</span><br><span class="line">  handle(e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  somethingRisky();</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!canHandle(e)) <span class="keyword">throw</span> e;</span><br><span class="line">  handle(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h2><h3 id="PREFER-使用async-await"><a href="#PREFER-使用async-await" class="headerlink" title="PREFER 使用async/await"></a>PREFER 使用async/await</h3><p>众所周知，异步代码很难阅读和调试，即使使用像futures这样的抽象也是如此。async/ wait语法提高了可读性，允许您在异步代码中使用所有Dart控制流结构。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line">Future&lt;<span class="built_in">int</span>&gt; countActivePlayers(<span class="built_in">String</span> teamName) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> team = <span class="keyword">await</span> downloadTeam(teamName);</span><br><span class="line">    <span class="keyword">if</span> (team == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> players = <span class="keyword">await</span> team.roster;</span><br><span class="line">    <span class="keyword">return</span> players.where((player) =&gt; player.isActive).length;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    log.error(e);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line">Future&lt;<span class="built_in">int</span>&gt; countActivePlayers(<span class="built_in">String</span> teamName) &#123;</span><br><span class="line">  <span class="keyword">return</span> downloadTeam(teamName).then((team) &#123;</span><br><span class="line">    <span class="keyword">if</span> (team == <span class="keyword">null</span>) <span class="keyword">return</span> Future.value(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> team.roster.then((players) &#123;</span><br><span class="line">      <span class="keyword">return</span> players.where((player) =&gt; player.isActive).length;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;).catchError((e) &#123;</span><br><span class="line">    log.error(e);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="DON’T-在没有用时使用async"><a href="#DON’T-在没有用时使用async" class="headerlink" title="DON’T 在没有用时使用async"></a>DON’T 在没有用时使用async</h3><p>在任何执行与异步相关的操作的函数上都很容易养成使用异步的习惯。但在某些情况下，这是无关紧要的。如果可以在不更改函数行为的情况下可以省略异步，那么就省略。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line">Future afterTwoThings(Future first, Future second) &#123;</span><br><span class="line">  <span class="keyword">return</span> Future.wait([first, second]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line">Future afterTwoThings(Future first, Future second) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> Future.wait([first, second]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以下情况 async 是有用的：</p>
+<ul>
+<li><p>正在使用await。（这是显而易见的。）</p>
+</li>
+<li><p>正在异步返回一个错误。<strong>async</strong>比<strong>throw</strong>跑出更短的<strong>return Future.error(…)</strong>。</p>
+</li>
+<li><p>正在返回一个值，并且希望在将来隐式地包装它。 async比Future.value(…)短</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Future usesAwait(Future later) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="keyword">await</span> later);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Future asyncError() <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="string">'Error!'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Future asyncValue() <span class="keyword">async</span> =&gt; <span class="string">'value'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="CONSIDER-使用高阶方法转换流"><a href="#CONSIDER-使用高阶方法转换流" class="headerlink" title="CONSIDER 使用高阶方法转换流"></a>CONSIDER 使用高阶方法转换流</h3><p>这与上述关于迭代的建议相似。Streams支持许多相同的方法，并且还可以正确处理传输错误、关闭等操作。</p>
+<h3 id="AVOID-直接使用Completer"><a href="#AVOID-直接使用Completer" class="headerlink" title="AVOID 直接使用Completer"></a>AVOID 直接使用Completer</h3><p>许多刚接触异步编程的人想要编写可以产生未来的代码。Future中的构造函数似乎不符合他们的需要，因此他们最终找到了Completer类并使用它<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Bad</span></span><br><span class="line">Future&lt;<span class="built_in">bool</span>&gt; fileContainsBear(<span class="built_in">String</span> path) &#123;</span><br><span class="line">  <span class="keyword">var</span> completer = Completer&lt;<span class="built_in">bool</span>&gt;();</span><br><span class="line"></span><br><span class="line">  File(path).readAsString().then((contents) &#123;</span><br><span class="line">    completer.complete(contents.contains(<span class="string">'bear'</span>));</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> completer.future;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>两种低级代码需要Completer: <strong>new asynchronous primitives</strong>以及与不使用future的异步代码的接口。大多数其他代码应该使用async / await，或者Future.then()因为它们更清晰并且使错误处理更容易。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">bool</span>&gt; fileContainsBear(<span class="built_in">String</span> path) &#123;</span><br><span class="line">  <span class="keyword">return</span> File(path).readAsString().then((contents) &#123;</span><br><span class="line">    <span class="keyword">return</span> contents.contains(<span class="string">'bear'</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Future&lt;<span class="built_in">bool</span>&gt; fileContainsBear(<span class="built_in">String</span> path) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> contents = <span class="keyword">await</span> File(path).readAsString();</span><br><span class="line">  <span class="keyword">return</span> contents.contains(<span class="string">'bear'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="DO-在消除类型参数为Object的FutureOr的歧义时，测试Future。"><a href="#DO-在消除类型参数为Object的FutureOr的歧义时，测试Future。" class="headerlink" title="DO 在消除类型参数为Object的FutureOr的歧义时，测试Future。"></a>DO 在消除类型参数为Object的FutureOr<t>的歧义时，测试Future<t>。</t></t></h3><p>可以用做任何有用的FutureOr<t>事情之前，通常需要用is检查是否有一个Future<t>或一个空的T。如果类型参数是某些特定类型的FutureOr<int>，在不重要的测试中可以使用is int或is Future<int>。两者都有效，因为这两种类型是不相交的。</int></int></t></t></p>
+<p>但是，如果值类型是Object或可能用Object实例化的类型参数，则这两个分支重叠。Future<object>本身实现Object，所以is Object或is T，其中T是可以用Object实例化的类型参数，即使对象是Future，也返回true。相反，显式地测试未来的情况:<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Good</span></span><br><span class="line">Future&lt;T&gt; logValue&lt;T&gt;(FutureOr&lt;T&gt; value) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (value <span class="keyword">is</span> Future&lt;T&gt;) &#123;</span><br><span class="line">    <span class="keyword">var</span> result = <span class="keyword">await</span> value;</span><br><span class="line">    <span class="built_in">print</span>(result);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(value);</span><br><span class="line">    <span class="keyword">return</span> value <span class="keyword">as</span> T;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line">Future&lt;T&gt; logValue&lt;T&gt;(FutureOr&lt;T&gt; value) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (value <span class="keyword">is</span> T) &#123;</span><br><span class="line">    <span class="built_in">print</span>(value);</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> result = <span class="keyword">await</span> value;</span><br><span class="line">    <span class="built_in">print</span>(result);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></object></p>
+<p>在这个糟糕的示例中，如果您传递给它一个Future<object>，它会错误地将其视为一个空的同步值。</object></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Aries</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://ranna520.github.io/2019/02/25/高效编写Dart-使用指南/" title="高效编写Dart--使用指南">https://ranna520.github.io/2019/02/25/高效编写Dart-使用指南/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tag/" rel="tag"># tag</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/25/高效编写Dart-文档指南/" rel="next" title="高效编写Dart--文档指南">
+                <i class="fa fa-chevron-left"></i> 高效编写Dart--文档指南
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Aries">
+            
+              <p class="site-author-name" itemprop="name">Aries</p>
+              <p class="site-description motion-element" itemprop="description">记录成长的过程</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何阅读指南"><span class="nav-number">1.</span> <span class="nav-text">如何阅读指南</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#库"><span class="nav-number">2.</span> <span class="nav-text">库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DO-part-of指令中使用字符串"><span class="nav-number">2.1.</span> <span class="nav-text">DO part of指令中使用字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DON’T-导入另一个包的src目录中的库"><span class="nav-number">2.2.</span> <span class="nav-text">DON’T 导入另一个包的src目录中的库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PREFER-导入包的lib目录中的库时的使用相对路径"><span class="nav-number">2.3.</span> <span class="nav-text">PREFER 导入包的lib目录中的库时的使用相对路径</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串"><span class="nav-number">3.</span> <span class="nav-text">字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DO-使用相邻的字符串来连接字符串文字"><span class="nav-number">3.1.</span> <span class="nav-text">DO 使用相邻的字符串来连接字符串文字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PREFER-使用插值来组合字符串和值"><span class="nav-number">3.2.</span> <span class="nav-text">PREFER 使用插值来组合字符串和值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AVOID-在不需要时使用花括号进行插值"><span class="nav-number">3.3.</span> <span class="nav-text">AVOID 在不需要时使用花括号进行插值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合"><span class="nav-number">4.</span> <span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DO-尽可能使用集合字面意义的方式"><span class="nav-number">4.1.</span> <span class="nav-text">DO 尽可能使用集合字面意义的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DON’T-用-length来查看集合是否为空"><span class="nav-number">4.2.</span> <span class="nav-text">DON’T 用.length来查看集合是否为空</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CONSIDER-使用高阶方法转换序列"><span class="nav-number">4.3.</span> <span class="nav-text">CONSIDER 使用高阶方法转换序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AVOID-使用Iterable-forEach-函数"><span class="nav-number">4.4.</span> <span class="nav-text">AVOID 使用Iterable.forEach()函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DON’T-使用List-from-，除非您打算更改结果的类型"><span class="nav-number">4.5.</span> <span class="nav-text">DON’T 使用List.from()，除非您打算更改结果的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DO-whereType-按类型过滤集合"><span class="nav-number">4.6.</span> <span class="nav-text">DO whereType()按类型过滤集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DON’T-当附近的操作可以执行时，使用cast"><span class="nav-number">4.7.</span> <span class="nav-text">DON’T 当附近的操作可以执行时，使用cast()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AVOID-使用cast"><span class="nav-number">4.8.</span> <span class="nav-text">AVOID 使用cast()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#功能"><span class="nav-number">5.</span> <span class="nav-text">功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DO-使用函数声明将函数绑定到名称"><span class="nav-number">5.1.</span> <span class="nav-text">DO 使用函数声明将函数绑定到名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DON’T-当省略时创建lambda"><span class="nav-number">5.2.</span> <span class="nav-text">DON’T 当省略时创建lambda</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数"><span class="nav-number">6.</span> <span class="nav-text">参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DO-使用-将命名参数与其默认值分隔开"><span class="nav-number">6.1.</span> <span class="nav-text">DO 使用 = 将命名参数与其默认值分隔开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DON’T-显式的设置默认值为null"><span class="nav-number">6.2.</span> <span class="nav-text">DON’T 显式的设置默认值为null</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">7.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DON’T-将变量显式初始化为null"><span class="nav-number">7.1.</span> <span class="nav-text">DON’T 将变量显式初始化为null</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AVOID-存储可以计算的内容"><span class="nav-number">7.2.</span> <span class="nav-text">AVOID 存储可以计算的内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成员"><span class="nav-number">8.</span> <span class="nav-text">成员</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DON’T-在getter和setter中不必要地包装字段"><span class="nav-number">8.1.</span> <span class="nav-text">DON’T 在getter和setter中不必要地包装字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PREFER-使用final字段来创建只读属性"><span class="nav-number">8.2.</span> <span class="nav-text">PREFER 使用final字段来创建只读属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CONSIDER-使用-gt-简单的成员"><span class="nav-number">8.3.</span> <span class="nav-text">CONSIDER 使用=&gt;简单的成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DON’T-用-this-当不需要避免shadowing时"><span class="nav-number">8.4.</span> <span class="nav-text">DON’T 用 this. 当不需要避免shadowing时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DO-尽可能在声明时初始化字段"><span class="nav-number">8.5.</span> <span class="nav-text">DO 尽可能在声明时初始化字段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造函数"><span class="nav-number">9.</span> <span class="nav-text">构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DO-尽可能使用初始化形式"><span class="nav-number">9.1.</span> <span class="nav-text">DO 尽可能使用初始化形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DON’T-类型注释初始化形式"><span class="nav-number">9.2.</span> <span class="nav-text">DON’T 类型注释初始化形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DO-使用-而不是-空构造函数体"><span class="nav-number">9.3.</span> <span class="nav-text">DO 使用;而不是{}空构造函数体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DON’T-使用new"><span class="nav-number">9.4.</span> <span class="nav-text">DON’T 使用new</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DON’T-多余地使用const"><span class="nav-number">9.5.</span> <span class="nav-text">DON’T 多余地使用const</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误处理"><span class="nav-number">10.</span> <span class="nav-text">错误处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AVOID-捕捉没有-on-的子句"><span class="nav-number">10.1.</span> <span class="nav-text">AVOID 捕捉没有 on 的子句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DON’T-没有on子句情况下-放弃捕获的错误，"><span class="nav-number">10.2.</span> <span class="nav-text">DON’T 没有on子句情况下,放弃捕获的错误，</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DO-抛出Error仅用于编程错误的对象"><span class="nav-number">10.3.</span> <span class="nav-text">DO 抛出Error仅用于编程错误的对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DON’T-显式捕获错误或实现错误的类型"><span class="nav-number">10.4.</span> <span class="nav-text">DON’T 显式捕获错误或实现错误的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DO-使用rethrow重新抛出捕获的异常"><span class="nav-number">10.5.</span> <span class="nav-text">DO 使用rethrow重新抛出捕获的异常</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步"><span class="nav-number">11.</span> <span class="nav-text">异步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PREFER-使用async-await"><span class="nav-number">11.1.</span> <span class="nav-text">PREFER 使用async/await</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DON’T-在没有用时使用async"><span class="nav-number">11.2.</span> <span class="nav-text">DON’T 在没有用时使用async</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CONSIDER-使用高阶方法转换流"><span class="nav-number">11.3.</span> <span class="nav-text">CONSIDER 使用高阶方法转换流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AVOID-直接使用Completer"><span class="nav-number">11.4.</span> <span class="nav-text">AVOID 直接使用Completer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DO-在消除类型参数为Object的FutureOr的歧义时，测试Future。"><span class="nav-number">11.5.</span> <span class="nav-text">DO 在消除类型参数为Object的FutureOr的歧义时，测试Future。</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aries</span>
+
+  
+  <div class="powered-by">
+  &nbsp;
+    <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+      本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+  </div>
+  
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":100,"height":200},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
